@@ -7,9 +7,10 @@ Author: Landers
 package like_dao
 
 import (
+	"sync"
+
 	"blog/models"
 	"blog/models/article"
-	"sync"
 )
 
 var likeLock sync.Mutex

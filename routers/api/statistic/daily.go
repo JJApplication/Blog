@@ -7,9 +7,10 @@ Name: blog
 package statistic
 
 import (
+	"net/http"
+
 	"blog/models/dao/statistics_dao"
 	"github.com/gin-gonic/gin"
-	"net/http"
 )
 
 func GetDaily(c *gin.Context) {

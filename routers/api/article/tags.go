@@ -14,10 +14,11 @@ package article
 */
 
 import (
+	"net/http"
+
 	"blog/models/dao/tag_dao"
 	"blog/utils/err"
 	"github.com/gin-gonic/gin"
-	"net/http"
 )
 
 func GetTags(c *gin.Context) {

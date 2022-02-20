@@ -7,9 +7,10 @@ Github: github.com/landers1037
 package dashboard
 
 import (
+	"net/http"
+
 	"blog/models/dao/post_dao"
 	"github.com/gin-gonic/gin"
-	"net/http"
 )
 
 func GetPost(c *gin.Context) {

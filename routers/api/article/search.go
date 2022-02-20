@@ -7,9 +7,10 @@ Name: blog
 package article
 
 import (
+	"net/http"
+
 	"blog/models/article"
 	"github.com/gin-gonic/gin"
-	"net/http"
 )
 
 func Search(c *gin.Context) {

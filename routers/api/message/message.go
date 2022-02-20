@@ -7,9 +7,10 @@ Name: blog
 package message
 
 import (
+	"net/http"
+
 	"blog/models/dao/message_dao"
 	"github.com/gin-gonic/gin"
-	"net/http"
 )
 
 type message struct {

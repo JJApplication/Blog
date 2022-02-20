@@ -7,9 +7,10 @@ Author: Landers
 package article
 
 import (
+	"net/http"
+
 	"blog/models/dao/statistics_dao"
 	"github.com/gin-gonic/gin"
-	"net/http"
 )
 
 // GetViews 文章访问量

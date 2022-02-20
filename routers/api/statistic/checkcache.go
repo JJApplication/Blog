@@ -7,9 +7,10 @@ Name: blog
 package statistic
 
 import (
+	"net/http"
+
 	"blog/middleware"
 	"github.com/gin-gonic/gin"
-	"net/http"
 )
 
 func CheckCache(c *gin.Context) {

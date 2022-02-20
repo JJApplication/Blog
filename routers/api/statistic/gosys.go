@@ -7,9 +7,10 @@ Name: blog
 package statistic
 
 import (
+	"net/http"
+
 	"blog/utils/cmd"
 	"github.com/gin-gonic/gin"
-	"net/http"
 )
 
 func GetRoutines(c *gin.Context) {

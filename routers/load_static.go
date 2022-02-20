@@ -7,12 +7,13 @@ Github: github.com/landers1037
 package routers
 
 import (
-	"blog/config"
-	"blog/logger"
 	"encoding/json"
-	"github.com/gin-gonic/gin"
 	"io/ioutil"
 	"net/http"
+
+	"blog/config"
+	"blog/logger"
+	"github.com/gin-gonic/gin"
 )
 
 type staticRouter struct {

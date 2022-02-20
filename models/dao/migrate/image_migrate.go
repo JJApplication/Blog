@@ -7,10 +7,11 @@ Github: github.com/landers1037
 package migrate
 
 import (
-	"blog/models/article"
 	"fmt"
-	"github.com/jinzhu/gorm"
 	"strings"
+
+	"blog/models/article"
+	"github.com/jinzhu/gorm"
 )
 
 // ImageMigrate 专用于图片资源的地址迁移工作

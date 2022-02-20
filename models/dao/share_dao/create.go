@@ -7,9 +7,10 @@ Author: Landers
 package share_dao
 
 import (
+	"sync"
+
 	"blog/models"
 	"blog/models/article"
-	"sync"
 )
 
 var shareLock sync.Mutex

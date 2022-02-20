@@ -7,9 +7,10 @@ Name: blog
 package article
 
 import (
+	"net/http"
+
 	"blog/models/dao/post_dao"
 	"github.com/gin-gonic/gin"
-	"net/http"
 )
 
 func GetBrother(c *gin.Context) {
