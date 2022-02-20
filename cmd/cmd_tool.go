@@ -19,19 +19,20 @@ Package cmd
 package cmd
 
 import (
-	"blog/logger"
-	"blog/models/dao/crdb"
-	"blog/models/dao/migrate"
-	"blog/utils/settings"
 	"errors"
 	"fmt"
-	"github.com/jinzhu/gorm"
-	"github.com/urfave/cli/v2"
 	"io/ioutil"
 	"os"
 	"os/exec"
 	"path"
 	"time"
+
+	"blog/logger"
+	"blog/models/dao/crdb"
+	"blog/models/dao/migrate"
+	"blog/utils/settings"
+	"github.com/jinzhu/gorm"
+	"github.com/urfave/cli/v2"
 )
 
 // AddToolCmds 添加工具命令

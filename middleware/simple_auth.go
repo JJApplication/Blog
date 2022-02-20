@@ -10,9 +10,10 @@ package middleware
 //基于referer的简单验证
 
 import (
+	"strings"
+
 	"blog/config"
 	"github.com/gin-gonic/gin"
-	"strings"
 )
 
 // SimpleAuth 建议请求头和host验证

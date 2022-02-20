@@ -8,15 +8,16 @@ Github: github.com/landers1037
 package cmd
 
 import (
-	"blog/config"
-	"blog/utils/settings"
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"github.com/urfave/cli/v2"
 	"io/ioutil"
 	"os"
 	"os/exec"
+
+	"blog/config"
+	"blog/utils/settings"
+	"github.com/urfave/cli/v2"
 )
 
 // AddConfigCmds 配置文件入口

@@ -7,9 +7,10 @@ Github: github.com/landers1037
 package middleware
 
 import (
+	"strings"
+
 	"blog/config"
 	"github.com/gin-gonic/gin"
-	"strings"
 )
 
 // AllowIe 如果是ie返回错误

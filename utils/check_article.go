@@ -8,10 +8,11 @@ package utils
 
 import (
 	"bytes"
-	"github.com/adrg/frontmatter"
 	"regexp"
 	"strconv"
 	"strings"
+
+	"github.com/adrg/frontmatter"
 )
 
 // 校验文章的合法性

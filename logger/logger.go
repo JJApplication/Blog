@@ -7,10 +7,11 @@ Github: github.com/landers1037
 package logger
 
 import (
-	"blog/utils/settings"
 	"fmt"
 	"io"
 	"os"
+
+	"blog/utils/settings"
 )
 
 // Logger 默认只提供到终端的日志记录器

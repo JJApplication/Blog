@@ -8,9 +8,10 @@ package cmd
 
 import (
 	"fmt"
-	"github.com/urfave/cli/v2"
 	"os"
 	"time"
+
+	"github.com/urfave/cli/v2"
 )
 
 // RegisterCLI 注册命令行入口

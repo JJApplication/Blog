@@ -7,10 +7,11 @@ Author: Landers
 package middleware
 
 import (
-	"blog/logger"
 	"fmt"
-	"github.com/gin-gonic/gin"
 	"time"
+
+	"blog/logger"
+	"github.com/gin-gonic/gin"
 )
 
 // BlogLogger 自定义的日志器

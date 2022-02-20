@@ -7,9 +7,10 @@ Github: github.com/landers1037
 package config
 
 import (
-	"blog/utils/settings"
 	"log"
 	"os"
+
+	"blog/utils/settings"
 )
 
 var Cfg settings.Cfg

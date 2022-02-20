@@ -7,11 +7,12 @@ Github: github.com/landers1037
 package middleware
 
 import (
+	"time"
+
 	"blog/config"
 	"blog/models/dao/statistics_dao"
 	"blog/timer"
 	"github.com/gin-gonic/gin"
-	"time"
 )
 
 // PostView 文章开启阅读访问量统计

@@ -7,11 +7,12 @@ Github: github.com/landers1037
 package cmd
 
 import (
+	"fmt"
+	"runtime"
+
 	"blog/utils/cmd"
 	"blog/utils/settings"
-	"fmt"
 	"github.com/urfave/cli/v2"
-	"runtime"
 )
 
 // ServiceManager 服务管理动作

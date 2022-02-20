@@ -7,8 +7,9 @@ Github: github.com/landers1037
 package timer
 
 import (
-	"blog/logger"
 	"time"
+
+	"blog/logger"
 )
 
 // InitTimer 启动timer

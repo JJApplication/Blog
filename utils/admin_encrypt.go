@@ -7,9 +7,10 @@ Github: github.com/landers1037
 package utils
 
 import (
-	"blog/config"
 	"crypto/sha256"
 	"fmt"
+
+	"blog/config"
 )
 
 // AdminEncrypt 内部实现逻辑很简单只需要比对加密后的串是否一致

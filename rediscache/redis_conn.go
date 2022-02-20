@@ -9,10 +9,11 @@ Name: blog
 package rediscache
 
 import (
-	"blog/config"
 	"encoding/json"
-	"github.com/gomodule/redigo/redis"
 	"time"
+
+	"blog/config"
+	"github.com/gomodule/redigo/redis"
 )
 
 var RedisConn *redis.Pool
