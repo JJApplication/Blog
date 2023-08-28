@@ -9,6 +9,7 @@
           <el-menu-item index="2-2"><a href="/search">搜索</a></el-menu-item>
           <el-menu-item index="2-3"><a href="/tag">标签</a></el-menu-item>
           <el-menu-item index="2-4"><a href="/archive">归档</a></el-menu-item>
+          <el-menu-item index="2-4"><a href="/message">留言</a></el-menu-item>
           <el-submenu index="2-5" :popper-append-to-body="false">
             <template slot="title">管理</template>
             <el-menu-item index="2-5-1">
@@ -30,7 +31,7 @@
     </div>
     <div class="next-banner">
       <div class="next-body">
-        <h1 style="margin: 1rem 0; color: #f5f5f5; font-size: 4rem">
+        <h1>
           Welcome to Blog
           <span style="color: #9569ca">NEXT</span>
         </h1>
@@ -39,15 +40,18 @@
             text-align: left;
             color: #ffbb5b;
             margin: 1rem 0;
-            font-size: 1.15rem;
+            font-size: 0.9rem;
             background-color: #1f211895;
             padding: 0.75rem 1rem;
           "
         >
-          Don't try so hard, the best things come when you least expect them to.
+          Some of us get dipped in flat, some in satin, some in gloss. But every once in a while you find someone who's iridescent, and when you do, nothing will ever compare.
         </p>
         <div class="explore" @click="explore">Explore</div>
       </div>
+    </div>
+    <div class="footer" title="Hello, this is Blog NEXT version">
+      <div>Blog - NEXT</div>
     </div>
   </div>
 </template>
@@ -131,6 +135,9 @@ export default {
 #next-home /deep/ .el-menu--horizontal .el-menu-item:not(.is-disabled):hover {
   background-color: #100e0e65;
 }
+#next-home /deep/ .el-menu--horizontal>.el-menu-item.is-active {
+  border-bottom: none;
+}
 .next-banner {
   position: absolute;
   top: 0;
@@ -145,8 +152,14 @@ export default {
 }
 .next-body {
   position: fixed;
-  top: calc(50% - 6rem);
+  top: calc(50% - 8rem);
   left: 5rem;
+}
+.next-body h1 {
+  text-align: left;
+  margin: 1rem 0;
+  color: #f5f5f5;
+  font-size: 5rem
 }
 @media (max-width: 840px) {
   .next-body {
@@ -154,6 +167,9 @@ export default {
     top: calc(50% - 10rem);
     left: 0;
     padding: 0 1rem;
+  }
+  .next-body h1 {
+    font-size: 3.5rem;
   }
 }
 .next-body .explore {
@@ -168,5 +184,14 @@ export default {
 }
 .next-body .explore:hover {
   background-color: #7624db;
+}
+.footer {
+  color: #FFFFFF;
+  font-weight: bold;
+  font-size: 0.85rem;
+  position: fixed;
+  z-index: 999;
+  bottom: 1rem;
+  right: 1rem;
 }
 </style>

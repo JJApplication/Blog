@@ -53,6 +53,8 @@
         --zhuanlan-bg: #ffffff;
         --zhuanlan-title: #42b983;
         --zhuanlan-count: #576b95;
+        --backtop-bg: #FFFFFF;
+        --backtop-hover-bg: #e4e4fa;
     }
 }
 
@@ -110,6 +112,8 @@
         --zhuanlan-bg: #2a2a2d;
         --zhuanlan-title: #42b983;
         --zhuanlan-count: #708d9f;
+        --backtop-bg: #2B2B2B;
+        --backtop-hover-bg: #505050;
     }
 }
 
@@ -166,5 +170,7 @@
         --zhuanlan-bg: #ffffff;
         --zhuanlan-title: #42b983;
         --zhuanlan-count: #576b95;
+        --backtop-bg: #FFFFFF;
+        --backtop-hover-bg: #e4e4fa;
     }
 }

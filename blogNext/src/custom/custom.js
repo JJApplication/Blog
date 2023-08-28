@@ -4,7 +4,7 @@ let prefix = 'https:' === document.location.protocol ? 'https' : 'http'
 const customData = {
   // 前端分离时使用
   // api_url: prefix + "://127.0.0.1:5000",
-  api_url: '',
+  api_url: 'http://renj.io:5000',
   author: 'Landers',
   top_banner: 'Landers1037',
   top_span: '须知少时凌云志 曾许人间第一流',
@@ -23,7 +23,7 @@ const customData = {
   bottom_tag2: 'Github',
   bottom_url2: 'https://landers1037.github.io',
   bottom_span: 'Golang & Vue',
-  email: 'mail@renj.io',
+  email: 'liaorenj@gmail.com',
   start_year: '2017',
   start_date: '2017/7/1',
   dashboard_count: 1,

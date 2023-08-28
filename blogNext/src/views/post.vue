@@ -108,7 +108,7 @@
         <i class="el-icon-arrow-right el-icon-right"></i>
       </el-button>
     </div>
-    <el-backtop></el-backtop>
+    <el-backtop target="#app"></el-backtop>
     <bottom_banner></bottom_banner>
   </div>
 </template>

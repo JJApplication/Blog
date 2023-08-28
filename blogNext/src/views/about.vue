@@ -2,8 +2,10 @@
   <div class="about">
     <div class="head">
       <h1 style="margin-bottom: 40px">关于</h1>
-      <p>这是我的个人博客，记录了学习路上的点点滴滴</p>
-      <p>使用Go作为后端api,前端由Vue和ElementUI开发</p>
+      <h3 style="margin: 1rem 0">Blog - NEXT</h3>
+      <p>博客项目开始于2020年，迭代更新了很多版本， 一开始只是简单地做一个博客网站。<br>
+        渐渐地我开始意识到博客应该有什么东西，应该向他人表达什么，希望这些东西在BlogNEXT上能够以最直观的方式呈现出来
+      </p>
     </div>
     <div style="margin-top: 40px">
       <ul>
@@ -17,6 +19,8 @@
     </div>
     <div class="thanks">
       <p style="font-size: 1.4rem">感谢</p>
+      <p>感谢你的来访，也欢迎你能给我的博客提出宝贵的建议</p>
+      <p>保持对技术的热爱很难，但是人生嘛总要有些东西可以一直坚持下去</p>
       <ul>
         框架
         <a href="https://cn.vuejs.org/">Vuejs</a>
@@ -36,7 +40,7 @@
     </div>
     <div style="margin-bottom: 1.6rem; font-weight: bold">
       <p style="font-size: 1.4rem">框架设计 - renj.io</p>
-      <p style="padding: 10px"><a href="https://github.com/Landers1037/blog">Landers1037/blog</a></p>
+      <p style="padding: 10px"><a href="https://github.com/JJApplication/Blog/tree/next">JJAPP/BlogNext</a></p>
     </div>
     <div style="margin-bottom: 1.6rem; font-weight: bold">
       <p style="font-size: 1.4rem">404页面设计 - renj.io</p>
@@ -68,6 +72,8 @@ export default {
 <style scoped>
 .about {
   padding: 20px 10px;
+  max-width: 640px;
+  margin: 0 auto;
 }
 .about a {
   font-weight: bold;

@@ -34,7 +34,7 @@
         </div>
       </div>
     </div>
-    <el-backtop></el-backtop>
+    <el-backtop target="#app"></el-backtop>
     <bottom_banner></bottom_banner>
   </div>
 </template>
