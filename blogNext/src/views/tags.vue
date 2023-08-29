@@ -57,7 +57,8 @@ export default {
   font-size: 0.85rem;
   padding: 0 16px;
   height: 40px;
-  line-height: 36px;
+  line-height: 38px;
+  border: none;
 }
 
 .tags .list .tag:hover {
