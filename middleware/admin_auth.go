@@ -10,6 +10,7 @@ import (
 	"blog/config"
 	"blog/utils"
 	"github.com/gin-gonic/gin"
+	"net/http"
 )
 
 // 控制面板的登陆用户校验
@@ -31,7 +32,7 @@ func AdminAuth() gin.HandlerFunc {
 			if CheckToken(c) {
 				c.Next()
 			} else {
-				c.AbortWithStatus(403)
+				c.AbortWithStatus(http.StatusForbidden)
 				return
 			}
 			// return

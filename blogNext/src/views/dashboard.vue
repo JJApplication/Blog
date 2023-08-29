@@ -12,8 +12,9 @@
       </el-submenu>
       <el-menu-item index="3">专栏管理</el-menu-item>
       <el-menu-item index="4">留言管理</el-menu-item>
-      <el-menu-item index="5" @click="logout">退出登录</el-menu-item>
-      <el-menu-item index="6"><a href="/">返回主页</a></el-menu-item>
+      <el-menu-item index="5">图片管理</el-menu-item>
+      <el-menu-item index="6" @click="logout">退出登录</el-menu-item>
+      <el-menu-item index="7"><a href="/">返回主页</a></el-menu-item>
     </el-menu>
     <div class="dynamic-area">
       <!--            动态组件-->
@@ -31,9 +32,10 @@ import Share_card from '../components/share_card'
 import Like_card from '../components/like_card'
 import Comment_card from '../components/comment_card'
 import Show_card from '../components/show_card'
+import Image_card from "@/components/image_card.vue";
 export default {
   name: 'dashboard',
-  components: { Post_card, Zhuanlan_card, Message_card, View_card, Like_card, Share_card, Comment_card, Show_card },
+  components: { Post_card, Zhuanlan_card, Message_card, View_card, Like_card, Share_card, Comment_card, Show_card, Image_card },
   data() {
     return {
       activeIndex: '1',
@@ -47,6 +49,7 @@ export default {
         '2-5': 'Show_card',
         '3': 'Zhuanlan_card',
         '4': 'Message_card',
+        '5': 'Image_card'
       },
     }
   },

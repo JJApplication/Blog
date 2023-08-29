@@ -89,7 +89,8 @@ export default {
 .message_card /deep/ .el-table--enable-row-hover .el-table__body tr:hover>td.el-table__cell {
   background-color: var(--body-background);
 }
-.message_card /deep/ .el-table, .el-table__expanded-cell {
+.message_card /deep/ .el-table,
+.message_card /deep/ .el-table__expanded-cell {
   background-color: var(--body-background);
 }
 .message_card /deep/ .el-textarea__inner {

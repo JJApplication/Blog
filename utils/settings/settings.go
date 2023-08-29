@@ -17,15 +17,16 @@ import (
 )
 
 const (
-	APP_NAME           = "blog"
-	APP_FILE           = "conf/app.ini"
-	APP_PORT           = 5000
-	APP_LOG            = "data/blog.log"
-	APP_LOG_LEVEL      = "error"
-	APP_DB             = "data/blog.db"
-	APP_PID            = "data/blog.pid"
-	APP_DEFAULT_ADMIN  = "admin"
-	APP_DEFAULT_PASSWD = "12345"
+	APP_NAME                = "blog"
+	APP_FILE                = "conf/app.ini"
+	APP_PORT                = 5000
+	APP_LOG                 = "data/blog.log"
+	APP_LOG_LEVEL           = "error"
+	APP_DB                  = "data/blog.db"
+	APP_PID                 = "data/blog.pid"
+	APP_DEFAULT_ADMIN       = "admin"
+	APP_DEFAULT_PASSWD      = "12345"
+	APP_DEFAULT_IMAGES_ROOT = "images"
 )
 
 type Cfg struct {
@@ -92,6 +93,8 @@ type Cfg struct {
 	APPLogLevel  string
 	APPLogFile   string
 	APPLogEnable bool
+
+	APPImageRoot string
 }
 
 // 定义ini的映射结构体
@@ -148,6 +151,7 @@ type Server struct {
 	Cluster      bool          `ini:"CLUSTER"`
 	StaticRouter bool          `ini:"STATIC_ROUTER"`
 	HideDBLog    bool          `ini:"HIDE_DB_LOG"`
+	APPImageRoot string        `ini:"APP_IMAGE_ROOT"`
 }
 
 type Admin struct {
@@ -190,7 +194,7 @@ type Redis struct {
 	PostsTimeout int           `ini:"POSTSTIMEOUT"`
 }
 
-// 防止重复引用 使用初始化加载方式
+// InitCfg 防止重复引用 使用初始化加载方式
 // err分为读取失败 初始化失败
 // p不为空时优先判断是否存在 不存在会直接退出 这个操作不会触发配置的自动生成
 func InitCfg(p string) (Cfg, error) {
@@ -349,6 +353,7 @@ func loadServer(config *Cfg, c *ini.File) {
 	config.Cluster = server.Key("CLUSTER").MustBool(false)
 	config.StaticRouter = server.Key("STATIC_ROUTER").MustBool(false)
 	config.HideDBLog = server.Key("HIDE_DB_LOG").MustBool(false)
+	config.APPImageRoot = server.Key("APP_IMAGE_ROOT").MustString(APP_DEFAULT_IMAGES_ROOT)
 }
 
 func loadApp(config *Cfg, c *ini.File) {

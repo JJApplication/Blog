@@ -12,9 +12,11 @@ import (
 	"blog/routers/api/admin"
 	"blog/routers/api/article"
 	"blog/routers/api/dashboard"
+	"blog/routers/api/images"
 	"blog/routers/api/message"
 	"blog/routers/api/statistic"
 	"github.com/gin-gonic/gin"
+	"net/http"
 )
 
 func InitRouter() *gin.Engine {
@@ -26,7 +28,7 @@ func InitRouter() *gin.Engine {
 	addStaticRouter(r)
 
 	r.GET("/hello", func(c *gin.Context) {
-		c.JSON(200, gin.H{
+		c.JSON(http.StatusOK, gin.H{
 			"message": "hello this is my blog",
 		})
 	})
@@ -136,5 +138,15 @@ func InitRouter() *gin.Engine {
 		apiDashboard.GET("/zhuanlan", dashboard.GetZhuanlan)
 	}
 
+	// 静态资源 图片
+	r.Static("/images", config.Cfg.APPImageRoot)
+	apiImages := r.Group("/api/image")
+	addAdminAuth(apiImages)
+	{
+		apiImages.GET("/list", images.ListAllImages)
+		apiImages.POST("/upload", images.UploadImage)
+		apiImages.POST("/delete", images.DeleteImage)
+		apiImages.POST("/compress", images.CompressImage)
+	}
 	return r
 }

@@ -10,6 +10,7 @@ package middleware
 //基于referer的简单验证
 
 import (
+	"net/http"
 	"strings"
 
 	"blog/config"
@@ -31,7 +32,7 @@ func SimpleAuth() gin.HandlerFunc {
 			// 处理请求
 			c.Next()
 		} else {
-			c.AbortWithStatus(403)
+			c.AbortWithStatus(http.StatusForbidden)
 			return
 		}
 

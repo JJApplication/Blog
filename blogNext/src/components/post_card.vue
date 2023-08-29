@@ -93,7 +93,7 @@
           </el-input>
         </el-col>
       </el-row>
-      <v-md-editor v-model="post_open_content" height="640px" style="margin-top: 1.5rem"></v-md-editor>
+      <v-md-editor v-model="post_open_content" :disabled-menus="[]" @upload-image="handleUploadImage" height="600px" style="margin-top: 1.5rem"></v-md-editor>
       <span slot="footer" class="dialog-footer">
         <el-button size="mini" @click="post_open = false">取 消</el-button>
         <el-button size="mini" type="primary" @click="update_post_all">更 新</el-button>
@@ -136,6 +136,7 @@
 <script>
 import api_dash from '../api/dashboard'
 import customData from '../custom/custom'
+import api_image from "@/api/image";
 export default {
   name: 'post_card',
   data() {
@@ -438,6 +439,22 @@ ${res.data.data.content}`
           })
       }
     },
+    handleUploadImage(event, insertImage, files) {
+      if (files.length > 0) {
+        let formData = new FormData();
+        formData.set('file', files[0])
+        this.$http.post(api_image.upload, formData).then(res => {
+          if (res.data) {
+            insertImage({
+              url: res.data,
+              desc: 'image',
+            });
+          } else {
+            this.$message.error('图片上传失败')
+          }
+        })
+      }
+    }
   },
 }
 </script>

@@ -7,7 +7,7 @@
           <template slot="title">文章</template>
           <el-menu-item index="2-1"><a href="/home">首页</a></el-menu-item>
           <el-menu-item index="2-2"><a href="/search">搜索</a></el-menu-item>
-          <el-menu-item index="2-3"><a href="/tag">标签</a></el-menu-item>
+          <el-menu-item index="2-3"><a href="/tags">标签</a></el-menu-item>
           <el-menu-item index="2-4"><a href="/archive">归档</a></el-menu-item>
           <el-menu-item index="2-4"><a href="/message">留言</a></el-menu-item>
           <el-submenu index="2-5" :popper-append-to-body="false">
@@ -16,7 +16,7 @@
               <a href="/overview">架构总览</a>
             </el-menu-item>
             <el-menu-item index="2-5-2">
-              <a href="/dashboard">后台页面</a>
+              <a href="/dashboard">后台面板</a>
             </el-menu-item>
           </el-submenu>
         </el-submenu>

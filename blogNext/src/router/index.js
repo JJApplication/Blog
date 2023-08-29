@@ -42,6 +42,14 @@ const routes = [
     component: () => import('@/views/post.vue'),
   },
   {
+    path: '/tags',
+    name: 'tags',
+    meta: {
+      title: '标签 • Blog',
+    },
+    component: () => import('@/views/tags.vue'),
+  },
+  {
     path: '/t/:tag',
     name: 'tag',
     meta: {

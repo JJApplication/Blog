@@ -7,6 +7,7 @@ Github: github.com/landers1037
 package middleware
 
 import (
+	"net/http"
 	"strings"
 
 	"blog/config"
@@ -25,7 +26,7 @@ func AllowIe() gin.HandlerFunc {
 			if strings.Contains(userAgent, "MSIE8") ||
 				strings.Contains(userAgent, "MSIE9") ||
 				strings.Contains(userAgent, "MSIE10") {
-				c.AbortWithStatus(403)
+				c.AbortWithStatus(http.StatusForbidden)
 				return
 			}
 			c.Next()
