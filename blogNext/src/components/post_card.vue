@@ -22,10 +22,10 @@
         </el-upload>
       </el-col>
       <el-col :span="12">
-        <el-button @click="add_post_open = !add_post_open">新建文章</el-button>
-        <el-button type="primary" @click="export_all_post">导出全部文章</el-button>
-        <el-button type="success">导出数据库</el-button>
-        <el-button type="warning" @click="back_up_db">备份数据库</el-button>
+        <el-button @click="add_post_open = !add_post_open" icon="el-icon-document-add">新建文章</el-button>
+        <el-button type="primary" @click="export_all_post" icon="el-icon-takeaway-box">导出全部文章</el-button>
+        <el-button type="success" icon="el-icon-truck">导出数据库</el-button>
+        <el-button type="warning" @click="back_up_db" icon="el-icon-money">备份数据库</el-button>
       </el-col>
     </el-row>
 
@@ -80,7 +80,14 @@
         <el-button type="primary" @click="update_post">更 新</el-button>
       </span>
     </el-dialog>
-    <el-dialog title="文章编辑" :visible.sync="post_open" width="94%">
+    <el-dialog
+      title="文章编辑"
+      :visible.sync="post_open"
+      width="94%"
+      :close-on-click-modal="false"
+      :close-on-press-escape="false"
+      :destroy-on-close="true"
+    >
       <el-row :gutter="20">
         <el-col :span="8">
           <el-input style="color: #404040; font-weight: bold" v-model="post_open_title">
@@ -93,7 +100,13 @@
           </el-input>
         </el-col>
       </el-row>
-      <v-md-editor v-model="post_open_content" :disabled-menus="[]" @upload-image="handleUploadImage" height="600px" style="margin-top: 1.5rem"></v-md-editor>
+      <v-md-editor
+        v-model="post_open_content"
+        :disabled-menus="[]"
+        @upload-image="handleUploadImage"
+        height="600px"
+        style="margin-top: 1.5rem"
+      ></v-md-editor>
       <span slot="footer" class="dialog-footer">
         <el-button size="mini" @click="post_open = false">取 消</el-button>
         <el-button size="mini" type="primary" @click="update_post_all">更 新</el-button>
@@ -136,7 +149,7 @@
 <script>
 import api_dash from '../api/dashboard'
 import customData from '../custom/custom'
-import api_image from "@/api/image";
+import api_image from '@/api/image'
 export default {
   name: 'post_card',
   data() {
@@ -441,20 +454,20 @@ ${res.data.data.content}`
     },
     handleUploadImage(event, insertImage, files) {
       if (files.length > 0) {
-        let formData = new FormData();
+        let formData = new FormData()
         formData.set('file', files[0])
-        this.$http.post(api_image.upload, formData).then(res => {
+        this.$http.post(api_image.upload, formData).then((res) => {
           if (res.data) {
             insertImage({
               url: res.data,
               desc: 'image',
-            });
+            })
           } else {
             this.$message.error('图片上传失败')
           }
         })
       }
-    }
+    },
   },
 }
 </script>
@@ -479,10 +492,11 @@ ${res.data.data.content}`
 .post-card /deep/ .el-upload-dragger {
   background-color: var(--body-background);
 }
-.post-card /deep/ .el-table--enable-row-hover .el-table__body tr:hover>td.el-table__cell {
+.post-card /deep/ .el-table--enable-row-hover .el-table__body tr:hover > td.el-table__cell {
   background-color: var(--body-background);
 }
-.post-card /deep/ .el-table, .el-table__expanded-cell {
+.post-card /deep/ .el-table,
+.el-table__expanded-cell {
   background-color: var(--body-background);
 }
 </style>

@@ -148,6 +148,12 @@
             <div v-for="a in posts.list" :key="a.title" class="post animated slideInDown">
               <div style="position: relative">
                 <a class="post-a" :href="`/p/${a.name}`">{{ a.title }}</a>
+                <i
+                  title="阅读模式"
+                  class="post-view el-icon-reading"
+                  v-if="a.date.indexOf('-') !== -1"
+                  @click="linkTo(`/article/${a.name}`)"
+                ></i>
                 <span class="post-date" v-if="a.date.indexOf('-') !== -1">{{ a.date }}</span>
               </div>
               <div class="markdown-body abstract" v-html="mk(a.abstract)"></div>
@@ -228,7 +234,8 @@ import api_tags from '../api/tag'
 import pay from '../assets/pay.jpg'
 import Top_banner from '../components/top_banner'
 import Bottom_banner from '../components/bottom_banner'
-import markdownRender from "@/marked/marked";
+import markdownRender from '@/marked/marked'
+import linkTo from '@/router/to'
 export default {
   name: 'home',
   components: { Bottom_banner, Top_banner },
@@ -290,6 +297,7 @@ export default {
     _this.whatdays()
   },
   methods: {
+    linkTo,
     back() {
       //this.$router.push("/");//这个方法会有问题
       location.reload()

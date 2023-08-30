@@ -42,6 +42,11 @@ const routes = [
     component: () => import('@/views/post.vue'),
   },
   {
+    path: '/article/:url',
+    name: 'article',
+    component: () => import('@/views/article.vue'),
+  },
+  {
     path: '/tags',
     name: 'tags',
     meta: {

@@ -48,6 +48,19 @@ h1, h2, h3, h4, h5, h6 {
     top: 4px;
 }
 
+.post .post-view {
+    position: absolute;
+    right: 80px;
+    top: 4px;
+    cursor: pointer;
+    color: var(--post-date);
+    font-size: 14px;
+}
+
+.post .post-view:hover {
+    color: var(--post-title);
+}
+
 /*文章正文类*/
 .markdown-body p {
     margin-bottom: 10px!important;
@@ -83,7 +96,7 @@ h1, h2, h3, h4, h5, h6 {
     height: 14px;
 }
 
-[class*=" el-icon-"], [class^=el-icon-] {
+.bottom [class*=" el-icon-"], .bottom [class^=el-icon-] {
     color: var(--bottom-icon-color);
 }
 /*全局滚动条*/

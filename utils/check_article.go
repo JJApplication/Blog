@@ -42,7 +42,7 @@ type MdData struct {
 	Body     string
 }
 
-// 解析md源文件
+// ParseMd 解析md源文件
 // 一级解析器 生成不带meta的md字节
 func ParseMd(fileRaw []byte) []byte {
 	reg := regexp.MustCompile(`(?s)(^---[\s\S]*?---)(.*)`)
@@ -52,7 +52,7 @@ func ParseMd(fileRaw []byte) []byte {
 	return res
 }
 
-// 解析出yaml front
+// ParseYamlFront 解析出yaml front
 // 使用yaml front解析yaml头部信息
 func ParseYamlFront(fileRaw []byte) (Meta, error) {
 	var ym YamlData
@@ -82,7 +82,7 @@ func ParseYamlFront(fileRaw []byte) (Meta, error) {
 	}, nil
 }
 
-// 解析摘要 传入为去除meta的文本
+// ParseAbs 解析摘要 传入为去除meta的文本
 // 三级解析器 生成摘要信息
 func ParseAbs(fileRaw []byte) []byte {
 	// 摘要不存在时 使用默认摘要
@@ -96,7 +96,7 @@ func ParseAbs(fileRaw []byte) []byte {
 	return res
 }
 
-// 生成md文件的格式化结构体
+// GenMdData 生成md文件的格式化结构体
 func GenMdData(fileData []byte) (MdData, error) {
 	// 得到meta
 	meta, e := ParseYamlFront(fileData)
@@ -115,7 +115,7 @@ func GenMdData(fileData []byte) (MdData, error) {
 	}, nil
 }
 
-// 校验上传的文章字节流是否合法
+// CheckArticleOK 校验上传的文章字节流是否合法
 // 合法即包含需要的yaml front信息 且信息内的title和name不为空
 func CheckArticleOK(fileData []byte) bool {
 	meta, e := ParseYamlFront(fileData)
@@ -128,7 +128,7 @@ func CheckArticleOK(fileData []byte) bool {
 	return true
 }
 
-// 重新格式化meta信息
+// ReformatMeta 重新格式化meta信息
 // 可能出现时间不合法等情况 id不存在等情况
 func ReformatMeta(meta Meta) Meta {
 	var m Meta

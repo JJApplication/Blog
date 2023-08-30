@@ -135,10 +135,11 @@ func PostUpdateMap(name, newname, title, date, tags string, pin int) error {
 
 func PostUpdateEditor(name, title, tags, content string) error {
 	d := map[string]interface{}{
-		"title":   title,
-		"tags":    tags,
-		"update":  utils.GetDatePlus(),
-		"content": content,
+		"title":    title,
+		"tags":     tags,
+		"update":   utils.GetDatePlus(),
+		"content":  content,
+		"abstract": utils.ParseAbs([]byte(content)),
 	}
 	e := models.BlogDB.Model(&article.DB_BLOG_POST{}).Where("name = ?", name).Updates(d).Error
 	logger.BlogLogger.InfoF("开始更新文章 %s 错误: %v", name, e)
