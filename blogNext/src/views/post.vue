@@ -14,7 +14,7 @@
       <div class="markdown-body gallery" v-html="post" id="markdown-body"></div>
       <div style="padding: 10px">
         <el-tag style="margin: 0 4px" v-for="tag in tags" v-show="tag" :key="tag" type="info">
-          <a style="color: #909399" :href="'/t/' + tag">{{ tag }}</a>
+          <a style="color: #909399" :href="`/t/${tag}`">{{ tag }}</a>
         </el-tag>
       </div>
       <!--评论区-->

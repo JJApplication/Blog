@@ -135,6 +135,7 @@ export default {
 #next-home /deep/ .el-menu--horizontal .el-menu-item:not(.is-disabled):hover {
   background-color: #100e0e65;
 }
+#next-home /deep/ .el-menu--horizontal>.el-submenu.is-active .el-submenu__title,
 #next-home /deep/ .el-menu--horizontal>.el-menu-item.is-active {
   border-bottom: none;
 }

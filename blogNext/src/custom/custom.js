@@ -1,10 +1,10 @@
 // 可自由定制的项目
 // 在打包的时候使用
 let prefix = 'https:' === document.location.protocol ? 'https' : 'http'
+let api_server = import.meta.env.DEV ? 'http://renj.io:5000' : ''
 const customData = {
   // 前端分离时使用
-  // api_url: prefix + "://127.0.0.1:5000",
-  api_url: '',
+  api_url: api_server,
   author: 'Landers',
   top_banner: 'Landers1037',
   top_span: '须知少时凌云志 曾许人间第一流',
