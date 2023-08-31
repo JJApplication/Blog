@@ -29,7 +29,7 @@ export default {
 
 <style scoped>
 .bottom {
-  margin-top: 16px;
+  margin-top: 0.5rem;
   font-family: 'DejaVu Sans Mono', 'Segoe UI', Monaco, monospace;
 }
 #bottom-span {

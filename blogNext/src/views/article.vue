@@ -1,88 +1,93 @@
 <template>
   <div class="article-detail">
-    <div id="theme" v-show="theme_control">
+    <div v-if="canDisplay" id="theme" v-show="theme_control">
       <el-select v-model="theme" placeholder="代码主题" @change="change_theme">
         <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option>
       </el-select>
     </div>
-    <div class="article-body">
-      <el-row>
-        <el-col :span="6">
-          <div class="left-row">
-            <div class="title-card">
-              <div class="title">
-                <p>{{ title }}</p>
-              </div>
-              <p style="color: #afafaf; font-size: 1rem; font-weight: bold">
-                发布日期: {{ date }}
-                <span style="margin: 0 0.75rem">
+    <div v-if="canDisplay" class="article-body">
+      <div class="left-row">
+        <div class="title-card">
+          <div class="title">
+            <p>{{ title }}</p>
+          </div>
+          <p style="color: #afafaf; font-size: 1rem; font-weight: bold">
+            发布日期: {{ date }}
+            <span style="margin: 0 0.75rem">
                   <el-button type="primary" icon="el-icon-s-home" circle title="回到主页" @click="back"></el-button>
                   <el-button
-                    type="primary"
-                    icon="el-icon-notebook-2"
-                    circle
-                    title="博客模式"
-                    @click="postMode"
+                      type="primary"
+                      icon="el-icon-notebook-2"
+                      circle
+                      title="博客模式"
+                      @click="postMode"
                   ></el-button>
                   <el-button type="primary" icon="el-icon-share" circle title="分享" @click="send_shares"></el-button>
                 </span>
-              </p>
-            </div>
-            <el-card class="tag-card">
-              <div slot="header" class="clearfix">
-                <span>标签</span>
-              </div>
-              <el-tag style="margin: 0 4px" v-for="tag in tags" v-show="tag" :key="tag" type="info">
-                <a style="color: #909399" :href="`/t/${tag}`">{{ tag }}</a>
-              </el-tag>
-            </el-card>
-
-            <el-card class="float-toc">
-              <div slot="header" class="clearfix">
-                <span>文章目录</span>
-              </div>
-              <el-tree
-                :data="toc"
-                @node-click="handleNodeClick"
-                :highlight-current="true"
-                :default-expand-all="true"
-                :check-on-click-node="true"
-              ></el-tree>
-            </el-card>
+          </p>
+        </div>
+        <el-card class="tag-card">
+          <div slot="header" class="clearfix">
+            <span>标签</span>
           </div>
-        </el-col>
-        <el-col :span="18">
-          <div class="wrapper animated fadeIn">
-            <div class="markdown-body gallery" v-html="post" id="markdown-body"></div>
-            <!--评论区-->
-            <div class="comment-wrapper">
-              <el-divider></el-divider>
-              <div id="comments">
-                <div style="margin-bottom: 1rem">
-                  <!--                    评论标记-->
-                  <el-badge :value="comments_count" class="item">
-                    <el-button disabled size="small">评论</el-button>
-                  </el-badge>
-                  <!--                    点赞标记-->
-                  <el-badge :value="post_likes" class="item" type="primary">
-                    <el-button size="small" @click="send_likes">点赞</el-button>
-                  </el-badge>
-                  <!--                    分享标记-->
-                  <el-badge :value="post_shares" class="item" type="success">
-                    <el-button size="small" @click="send_shares">分享</el-button>
-                  </el-badge>
-                  <!--                    访问标记-->
-                  <el-badge :value="post_views" class="item" type="info">
-                    <el-button size="small">浏览</el-button>
-                  </el-badge>
-                </div>
-                <!--                    评论列表-->
-                <div
+          <el-tag style="margin: 0 4px" v-for="tag in tags" v-show="tag" :key="tag" type="info">
+            <a style="color: #909399" :href="`/t/${tag}`">{{ tag }}</a>
+          </el-tag>
+        </el-card>
+        <el-card class="count-card">
+          <div slot="header" class="clearfix">
+            <span>统计</span>
+          </div>
+          <p class="count-item">阅读次数: <span class="count">{{ post_views }}</span></p>
+          <p class="count-item">评论次数: <span class="count">{{ comments_count }}</span></p>
+          <p class="count-item">点赞次数: <span class="count">{{ post_likes }}</span></p>
+          <p class="count-item">分享次数: <span class="count">{{ post_shares }}</span></p>
+        </el-card>
+        <el-card class="float-toc">
+          <div slot="header" class="clearfix">
+            <span>文章目录</span>
+          </div>
+          <el-tree
+              :data="toc"
+              @node-click="handleNodeClick"
+              :highlight-current="true"
+              :default-expand-all="true"
+              :check-on-click-node="true"
+          ></el-tree>
+        </el-card>
+      </div>
+      <div class="right-row">
+        <div id="wrapper" class="wrapper animated fadeIn">
+          <div class="markdown-body gallery" v-html="post" id="markdown-body"></div>
+          <!--评论区-->
+          <div class="comment-wrapper">
+            <el-divider></el-divider>
+            <div id="comments">
+              <div style="margin-bottom: 1rem">
+                <!--                    评论标记-->
+                <el-badge :value="comments_count" class="item">
+                  <el-button disabled size="small">评论</el-button>
+                </el-badge>
+                <!--                    点赞标记-->
+                <el-badge :value="post_likes" class="item" type="primary">
+                  <el-button size="small" @click="send_likes">点赞</el-button>
+                </el-badge>
+                <!--                    分享标记-->
+                <el-badge :value="post_shares" class="item" type="success">
+                  <el-button size="small" @click="send_shares">分享</el-button>
+                </el-badge>
+                <!--                    访问标记-->
+                <el-badge :value="post_views" class="item" type="info">
+                  <el-button size="small">浏览</el-button>
+                </el-badge>
+              </div>
+              <!--                    评论列表-->
+              <div
                   style="border: 1px solid var(--comment-border); margin-bottom: 0.6rem; border-radius: 4px"
                   v-for="c in comments_list"
                   :key="c.primary_id"
-                >
-                  <div
+              >
+                <div
                     style="
                       background-color: var(--comment-title-bg);
                       color: var(--comment-color);
@@ -91,19 +96,19 @@
                       padding: 10px;
                       border-bottom: 1px solid var(--comment-border);
                     "
-                  >
-                    <span style="color: var(--comment-user); margin-right: 0.6rem">{{ c.user ? c.user : '匿名' }}</span>
-                    <span>评论于 {{ c.date }}</span>
-                  </div>
-                  <div style="padding: 10px" v-html="preview_code(c.comment)" class="markdown-body"></div>
+                >
+                  <span style="color: var(--comment-user); margin-right: 0.6rem">{{ c.user ? c.user : '匿名' }}</span>
+                  <span>评论于 {{ c.date }}</span>
                 </div>
+                <div style="padding: 10px" v-html="preview_code(c.comment)" class="markdown-body"></div>
               </div>
-              <!--                评论区-->
-              <div id="user-comment">
-                <el-tabs type="border-card">
-                  <el-tab-pane label="撰写评论">
-                    <div>
-                      <el-input
+            </div>
+            <!--                评论区-->
+            <div id="user-comment">
+              <el-tabs type="border-card">
+                <el-tab-pane label="撰写评论">
+                  <div>
+                    <el-input
                         id="raw_textarea"
                         type="textarea"
                         show-word-limit
@@ -112,36 +117,39 @@
                         :rows="4"
                         placeholder="有什么想说的，留下你的评论吧✏️"
                         v-model="comment_text"
-                      ></el-input>
-                    </div>
-                  </el-tab-pane>
-                  <el-tab-pane label="预览效果">
-                    <div style="padding: 6px" v-html="preview_comment" class="markdown-body"></div>
-                  </el-tab-pane>
-                  <el-input
+                    ></el-input>
+                  </div>
+                </el-tab-pane>
+                <el-tab-pane label="预览效果">
+                  <div style="padding: 6px" v-html="preview_comment" class="markdown-body"></div>
+                </el-tab-pane>
+                <el-input
                     v-model="comment_who"
                     maxlength="20"
                     clearable
                     placeholder="表明你是谁😎"
                     size="mini"
                     style="width: 10rem; margin-top: 1rem"
-                  ></el-input>
-                  <el-button
+                ></el-input>
+                <el-button
                     type="primary"
                     size="mini"
                     @click="send_comment"
                     style="float: right; margin-top: 1rem; border: none"
-                  >
-                    发布
-                  </el-button>
-                </el-tabs>
-              </div>
+                >
+                  发布
+                </el-button>
+              </el-tabs>
             </div>
           </div>
-        </el-col>
-      </el-row>
+        </div>
+      </div>
     </div>
-    <el-backtop target="#app"></el-backtop>
+    <div v-if="!canDisplay" style="padding: 2rem">
+      <h1 style="margin: 1rem">阅读模式仅支持宽屏1440px及以上</h1>
+      <el-button type="primary" @click="postMode">返回博客模式</el-button>
+    </div>
+    <el-backtop target=".right-row"></el-backtop>
     <bottom_banner></bottom_banner>
   </div>
 </template>
@@ -153,7 +161,6 @@ import customData from '../custom/custom'
 import api_article from '../api/article'
 import { get_code_theme, set_code_theme } from '../store/store'
 import markdownRender from '@/marked/marked'
-import * as url from 'url'
 
 export default {
   name: 'article',
@@ -252,6 +259,7 @@ export default {
         H6: 6,
       },
       toc: [],
+      canDisplay: true
     }
   },
   created() {
@@ -264,36 +272,49 @@ export default {
     },
   },
   mounted() {
-    let _this = this
-    this.loading(customData.loading_duration * 5, false)
-    this.$http
-      .get(api_article.api_article_more, { params: { name: this.url } })
-      .then((res) => {
-        let content = res.data.data['content']
-        _this.title = res.data.data['title']
-        document.title = _this.title + ' • Blog'
-        _this.date = res.data.data['date']
-        _this.tags = res.data.data.tags.split(' ')
-        _this.mk(content)
-        _this.$nextTick(() => {
-          this.theme_control = true
-          let pres = document.getElementsByTagName('pre')
-          for (let i = 0; i < pres.length; i++) {
-            pres[i].classList.add('hljs')
-          }
-          this.loading(0, true)
-        })
-      })
-      .catch((err) => {
-        this.theme_control = true
-        _this.$message.error('出现错误了，请求文章失败')
-      })
-    this.get_comments()
-    this.get_likes()
-    this.get_shares()
-    this.get_views()
+    this.canDisplay = document.body.clientWidth >= 1440;
+    window.onresize = () => {
+      this.canDisplay = document.body.clientWidth >= 1440;
+      if (this.canDisplay && !document.getElementById("wrapper")) {
+        this.initPage()
+      }
+    }
+    if (!this.canDisplay) {
+      return
+    }
+    this.initPage()
   },
   methods: {
+    initPage() {
+      let _this = this
+      this.loading(customData.loading_duration * 5, false)
+      this.$http
+          .get(api_article.api_article_more, { params: { name: this.url } })
+          .then((res) => {
+            let content = res.data.data['content']
+            _this.title = res.data.data['title']
+            document.title = _this.title + ' • Blog'
+            _this.date = res.data.data['date']
+            _this.tags = res.data.data.tags.split(' ')
+            _this.mk(content)
+            _this.$nextTick(() => {
+              this.theme_control = true
+              let pres = document.getElementsByTagName('pre')
+              for (let i = 0; i < pres.length; i++) {
+                pres[i].classList.add('hljs')
+              }
+              this.loading(0, true)
+            })
+          })
+          .catch((err) => {
+            this.theme_control = true
+            _this.$message.error('出现错误了，请求文章失败')
+          })
+      this.get_comments()
+      this.get_likes()
+      this.get_shares()
+      this.get_views()
+    },
     back() {
       this.$router.push('/home')
     },
@@ -571,9 +592,12 @@ export default {
 </script>
 
 <style scoped>
+::-webkit-scrollbar-thumb {
+  background-color: transparent;
+}
 .article-detail {
-  padding: 2rem 1rem;
-  max-width: 1600px;
+  padding: 2rem 1rem 0.5rem 1rem;
+  max-width: 1520px;
   margin: 0 auto;
 }
 .title-card {
@@ -585,20 +609,59 @@ export default {
   font-size: 1.75rem;
   margin-bottom: 1rem;
 }
+.article-body {
+  width: 100%;
+  display: flex;
+}
 .left-row {
   text-align: left;
   padding: 1rem;
   position: relative;
+  width: 25rem;
+  user-select: none;
 }
 .left-row .tag-card {
   margin-top: 1rem;
   min-width: 25rem;
 }
-.left-row .float-toc {
-  position: fixed;
+.left-row .count-card {
   margin-top: 1rem;
-  width: fit-content;
   min-width: 25rem;
+}
+.left-row .count-card .count-item {
+  font-size: 0.85rem;
+}
+.left-row .count-card .count-item .count {
+  font-weight: bold;
+  margin: 0 0.5rem;
+}
+.left-row .float-toc {
+  margin-top: 1rem;
+  min-width: 25rem;
+}
+.right-row {
+  width: calc(100% - 25rem);
+  height: calc(100vh - 8rem);
+  padding-bottom: 2rem;
+  overflow-y: auto;
+  cursor: pointer;
+}
+.left-row /deep/ .el-card {
+  background-color: var(--card-bg);
+  color: var(--card-color);
+  border: 1px solid var(--card-border);
+}
+.left-row /deep/ .el-card .el-card__header {
+  border-bottom: 1px solid var(--card-border);
+}
+.left-row /deep/ .el-tree {
+  background-color: var(--card-bg);
+  color: var(--card-color);
+}
+.left-row /deep/ .el-tree-node__content:hover,
+.left-row /deep/ .el-tree--highlight-current .el-tree-node.is-current>.el-tree-node__content {
+  background-color: var(--tree-select-bg);
+  color: var(--card-color);
 }
 #theme {
   position: fixed;

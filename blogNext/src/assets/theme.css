@@ -55,6 +55,10 @@
         --zhuanlan-count: #576b95;
         --backtop-bg: #FFFFFF;
         --backtop-hover-bg: #e4e4fa;
+        --card-bg: #FFFFFF;
+        --card-color: #303133;
+        --card-border: #EBEEF5;
+        --tree-select-bg: #f0f7ff;
     }
 }
 
@@ -114,6 +118,10 @@
         --zhuanlan-count: #708d9f;
         --backtop-bg: #2B2B2B;
         --backtop-hover-bg: #505050;
+        --card-bg: #333333;
+        --card-color: #F0F0F0;
+        --card-border: #282828;
+        --tree-select-bg: #424242;
     }
 }
 
@@ -172,5 +180,9 @@
         --zhuanlan-count: #576b95;
         --backtop-bg: #FFFFFF;
         --backtop-hover-bg: #e4e4fa;
+        --card-bg: #FFFFFF;
+        --card-color: #303133;
+        --card-border: #EBEEF5;
+        --tree-select-bg: #f0f7ff;
     }
 }

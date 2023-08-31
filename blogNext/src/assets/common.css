@@ -50,7 +50,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .post .post-view {
     position: absolute;
-    right: 80px;
+    right: 76px;
     top: 4px;
     cursor: pointer;
     color: var(--post-date);

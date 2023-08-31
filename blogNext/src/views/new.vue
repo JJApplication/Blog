@@ -28,4 +28,12 @@ export default {
   border-bottom: 1px solid #F0F0F0;
   padding: 1rem;
 }
+#what-new /deep/ .el-card {
+  background-color: var(--card-bg);
+  color: var(--card-color);
+  border: 1px solid var(--card-border);
+}
+#what-new/deep/ .el-card .el-card__header {
+  border-bottom: 1px solid var(--card-border);
+}
 </style>
