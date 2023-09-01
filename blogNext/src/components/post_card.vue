@@ -151,6 +151,7 @@
 import api_dash from '../api/dashboard'
 import customData from '../custom/custom'
 import api_image from '@/api/image'
+import { getToken } from "@/store/store";
 export default {
   name: 'post_card',
   data() {
@@ -186,8 +187,7 @@ export default {
   },
   computed: {
     insert_token() {
-      let t = localStorage.getItem('token')
-      return { admin_token: t }
+      return { admin_token: getToken() }
     },
     get_date() {
       let date = new Date(new Date().getTime())

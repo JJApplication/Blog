@@ -2,26 +2,28 @@ import customData from '../custom/custom'
 import { Message } from 'element-ui'
 import router from '../router'
 import axios from 'axios'
+import { getToken, rmToken } from "@/store/store";
 
-const httprequest = axios.create({
+const request = axios.create({
   baseURL: customData.api_url,
   withCredentials: false,
   timeout: 10000,
 })
 
-httprequest.interceptors.request.use((config) => {
-  if (localStorage.getItem('token')) {
-    config.headers.admin_token = localStorage.getItem('token')
+request.interceptors.request.use((config) => {
+  const token = getToken()
+  if (token) {
+    config.headers.admin_token = token
   }
   return config
 })
 
-httprequest.interceptors.response.use(
+request.interceptors.response.use(
   (response) => {
     if (response.status === 403) {
       console.log('无权限访问接口')
       Message.error('无权限访问接口')
-      localStorage.removeItem('token')
+      rmToken()
       setTimeout(() => {
         router.push('/')
       }, 1500)
@@ -32,11 +34,11 @@ httprequest.interceptors.response.use(
     if (error.response && error.response.status && error.response.status === 403) {
       console.log('无权限访问接口')
       Message.error('无权限访问接口')
-      localStorage.removeItem('token')
+      rmToken()
       setTimeout(() => {
         router.push('/')
       }, 1500)
     }
   },
 )
-export default httprequest
+export default request

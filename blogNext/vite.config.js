@@ -5,20 +5,17 @@ import { createVuePlugin } from 'vite-plugin-vue2'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [
-    createVuePlugin(),
-  ],
+  plugins: [createVuePlugin()],
   resolve: {
     alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url))
+      '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
-    extensions: ['.vue', '.js', '.jsx', '.ts', '.tsx']
+    extensions: ['.vue', '.js', '.jsx', '.ts', '.tsx'],
   },
   build: {
     rollupOptions: {
       output: {
-        manualChunks: id => {
-          console.log(id)
+        manualChunks: (id) => {
           if (id.includes('/node_modules/element-ui/lib/utils')) {
             return 'element-ui-util'
           } else if (id.includes('/node_modules/element-ui/lib/locale/')) {
@@ -29,9 +26,9 @@ export default defineConfig({
           if (id.includes('/node_modules/axios')) {
             return 'axios'
           }
-        }
-      }
+        },
+      },
     },
-    minify: true
-  }
+    minify: true,
+  },
 })

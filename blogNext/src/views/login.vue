@@ -19,6 +19,7 @@
 </template>
 <script>
 import api_dash from '@/api/dashboard'
+import { setToken } from "@/store/store";
 
 export default {
   name: 'login',
@@ -38,7 +39,7 @@ export default {
           .post(api_dash.login, { name: this.admin_name, passwd: this.admin_passwd })
           .then((res) => {
             if (res.data.data !== 'failed') {
-              localStorage.setItem('token', res.data.data)
+              setToken(res.data.data)
               this.$router.push('/dashboard')
             } else {
               this.$message.error('登录失败')

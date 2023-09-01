@@ -2,12 +2,12 @@
 // 使用传统的localStorage维持存储
 
 // 使用cookie作为第二份存储
-export function set_code_theme(theme) {
+export function setCodeTheme(theme) {
   localStorage.setItem('code_theme', theme)
 }
 
 // 传入参数 default theme
-export function get_code_theme(theme) {
+export function getCodeTheme(theme) {
   let code_theme
   if (localStorage.getItem('code_theme')) {
     code_theme = localStorage.getItem('code_theme')
@@ -19,6 +19,18 @@ export function get_code_theme(theme) {
       return 'github'
     }
   }
+}
+
+export function getToken() {
+  return localStorage.getItem('token')
+}
+
+export function setToken(token) {
+  localStorage.setItem('token', token)
+}
+
+export function rmToken() {
+  localStorage.removeItem('token')
 }
 
 export function get_admin_cookie() {

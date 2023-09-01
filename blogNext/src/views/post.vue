@@ -118,7 +118,7 @@ import Top_banner from '../components/top_banner'
 import Bottom_banner from '../components/bottom_banner'
 import customData from '../custom/custom'
 import api_article from '../api/article'
-import { get_code_theme, set_code_theme } from '../store/store'
+import { getCodeTheme, setCodeTheme } from '../store/store'
 import markdownRender from '@/marked/marked'
 import svg from '@/custom/svg'
 
@@ -354,7 +354,7 @@ export default {
     },
     init_theme() {
       // 存在主题配置时使用配置
-      this.theme = get_code_theme(customData.default_theme)
+      this.theme = getCodeTheme(customData.default_theme)
       this.change_theme()
     },
     // 基于字典的动态样式
@@ -367,7 +367,7 @@ export default {
         ? href_prefix + this.theme + '.min.css'
         : href_prefix + customData.default_theme + '.min.css'
       console.log('使用主题' + this.theme)
-      set_code_theme(this.theme)
+      setCodeTheme(this.theme)
       linkTag.setAttribute('href', href)
     },
     // 渲染图片资源 使用lightbox

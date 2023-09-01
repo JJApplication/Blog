@@ -33,6 +33,7 @@ import like_card from '../components/like_card'
 import comment_card from '../components/comment_card'
 import show_card from '../components/show_card'
 import image_card from '@/components/image_card.vue'
+import { rmToken } from "@/store/store";
 export default {
   name: 'dashboard',
   components: {
@@ -71,7 +72,7 @@ export default {
       this.dynamic_com = this.components_map[key]
     },
     logout() {
-      localStorage.removeItem('token')
+      rmToken()
       this.$message('你已经登出 即将返回主页')
       setTimeout(() => {
         this.$router.push('/')

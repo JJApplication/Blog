@@ -236,6 +236,7 @@ import Top_banner from '../components/top_banner'
 import Bottom_banner from '../components/bottom_banner'
 import markdownRender from '@/marked/marked'
 import linkTo from '@/router/to'
+import { getToken, setToken } from "@/store/store";
 export default {
   name: 'home',
   components: { Bottom_banner, Top_banner },
@@ -423,7 +424,7 @@ export default {
       if (this.dashboard_count > 0) {
         this.dashboard_count--
       } else {
-        if (localStorage.getItem('token')) {
+        if (getToken()) {
           this.goto_dashboard()
         } else {
           this.login = true
@@ -440,7 +441,7 @@ export default {
           .post(api_dash.login, { name: this.admin_name, passwd: this.admin_passwd })
           .then((res) => {
             if (res.data.data !== 'failed') {
-              localStorage.setItem('token', res.data.data)
+              setToken(res.data.data)
               this.goto_dashboard()
             } else {
               this.$message.error('登录失败')
