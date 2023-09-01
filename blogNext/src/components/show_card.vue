@@ -37,7 +37,7 @@
 import api_dash from '../api/dashboard'
 
 export default {
-  name: 'Show_card',
+  name: 'show_card',
   data() {
     return {
       view_all: '',
@@ -63,7 +63,7 @@ export default {
     get_all_data() {
       this.$http.get(api_dash.view).then((res) => {
         // 数组重排取最大值为all
-        let sort_data = res.data.data.sort(function (a, b) {
+        const sort_data = res.data.data.sort(function (a, b) {
           return b.view - a.view
         })
         this.view_all = sort_data[0]
@@ -76,7 +76,7 @@ export default {
       })
     },
     draw_all_view() {
-      let node = document.getElementById('chart-view-all')
+      const node = document.getElementById('chart-view-all')
       // gen
       let _labels = []
       let _datas = []
@@ -117,29 +117,32 @@ export default {
       })
     },
     get_comment_count() {
-      this.$http.get(api_dash.comment + '?name=all').then((res) => {
-        this.comment_count = res.data.data.length
-      })
+      this.$http
+        .get(api_dash.comment, {
+          params: {
+            name: 'all',
+          },
+        })
+        .then((res) => {
+          this.comment_count = res.data.data.length
+        })
     },
     get_view_count() {
-      let url = api_dash.view + '?name=all'
-      this.$http.get(url).then((res) => {
+      this.$http.get(api_dash.view, { params: { name: 'all' } }).then((res) => {
         if (res.data.data) {
           this.view_count = res.data.data
         }
       })
     },
     get_like_count() {
-      let url = api_dash.like + '?name=all'
-      this.$http.get(url).then((res) => {
+      this.$http.get(api_dash.like, { params: { name: 'all' } }).then((res) => {
         if (res.data.data) {
           this.like_count = res.data.data
         }
       })
     },
     get_share_count() {
-      let url = api_dash.share + '?name=all'
-      this.$http.get(url).then((res) => {
+      this.$http.get(api_dash.share, { params: { name: 'all' } }).then((res) => {
         if (res.data.data) {
           this.share_count = res.data.data
         }

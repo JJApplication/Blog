@@ -6,7 +6,7 @@
     <p style="margin: 2rem 0">十分抱歉, 你请求的页面资源不存在</p>
     <p style="margin: 2rem 0">
       This is the page generated with
-      <a href="https://github.com/landers1037/blog">Landers1037/blog</a>
+      <a :href="custom.blog_project_url">Landers1037/blog</a>
       , try it yourself.
     </p>
     <p style="margin-top: 4rem; font-weight: 400">Copyright renj.io</p>
@@ -15,8 +15,15 @@
 </template>
 
 <script>
+import custom from '@/custom/custom'
+
 export default {
   name: '404',
+  computed: {
+    custom() {
+      return custom
+    },
+  },
 }
 </script>
 

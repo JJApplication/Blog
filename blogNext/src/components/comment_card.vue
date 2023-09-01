@@ -37,7 +37,7 @@
 import api_dash from '../api/dashboard'
 
 export default {
-  name: 'Comment_card',
+  name: 'comment_card',
   data() {
     return {
       comments: [],
@@ -97,7 +97,8 @@ export default {
 .comment-card /deep/ .el-textarea__inner {
   background-color: var(--comment-bg);
 }
-.comment-card /deep/ .el-table, .el-table__expanded-cell {
+.comment-card /deep/ .el-table,
+.comment-card /deep/ .el-table__expanded-cell {
   background-color: var(--body-background);
 }
 </style>

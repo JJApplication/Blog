@@ -14,9 +14,9 @@
       </div>
       <div>
         <h3 style="margin: 10px; padding: 10px">专题文章</h3>
-        <div v-for="p in zhuanlan.posts" :key="p.name" class="post animated fadeInDown">
+        <div v-for="(p, i) in zhuanlan.posts" :key="`${p.name}-${i}`" class="post animated fadeInDown">
           <div style="position: relative">
-            <a class="post-a" :href="'/p/' + p.name">{{ p.title }}</a>
+            <a class="post-a" :href="`/p/${p.name}`">{{ p.title }}</a>
             <span class="post-date" v-if="p.date.indexOf('-') !== -1">{{ p.date }}</span>
           </div>
           <div class="markdown-body abstract" v-html="mk(p.abstract)"></div>
@@ -25,7 +25,7 @@
               v-for="t in tags_to_list(p.tags)"
               :key="t"
               effect="dark"
-              :content="'标签: ' + t"
+              :content="`标签: ${t}`"
               :enterable="false"
               placement="bottom-start"
             >
@@ -33,7 +33,7 @@
                 type="info"
                 size="small"
                 style="cursor: pointer; margin-right: 8px"
-                @click="$router.push('/t/' + t)"
+                @click="$router.push(`/t/${t}`)"
               >
                 {{ t }}
               </el-tag>
@@ -49,7 +49,7 @@
 <script>
 import api_zhuanlan from '../api/zhuanlan'
 import Bottom_banner from '../components/bottom_banner'
-import markdownRender from "@/marked/marked";
+import markdownRender from '@/marked/marked'
 export default {
   name: 'zhuanlan_page',
   components: { Bottom_banner },
@@ -93,7 +93,7 @@ export default {
 
 <style scoped>
 .zhuanlan-page {
-  padding: 4px 0;
+  padding: 4px 0 2rem 0;
 }
 .zhuanlan-top {
   padding: 50px 10px;

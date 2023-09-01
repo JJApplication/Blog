@@ -24,7 +24,7 @@
 <script>
 import api_dash from '../api/dashboard'
 export default {
-  name: 'View_card',
+  name: 'view_card',
   data() {
     return {
       view_list: [],
@@ -63,10 +63,11 @@ export default {
 
 <style scoped>
 /* 暗黑模式的适配 */
-.view-card /deep/ .el-table--enable-row-hover .el-table__body tr:hover>td.el-table__cell {
+.view-card /deep/ .el-table--enable-row-hover .el-table__body tr:hover > td.el-table__cell {
   background-color: var(--body-background);
 }
-.view-card /deep/ .el-table, .el-table__expanded-cell {
+.view-card /deep/ .el-table,
+.view-card /deep/ .el-table__expanded-cell {
   background-color: var(--body-background);
 }
 </style>

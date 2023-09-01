@@ -24,7 +24,7 @@
 <script>
 import api_dash from '../api/dashboard'
 export default {
-  name: 'Like_card',
+  name: 'like_card',
   data() {
     return {
       like_list: [],
@@ -35,13 +35,20 @@ export default {
   },
   methods: {
     get_like_list() {
-      this.$http.get(api_dash.like + '?name=all&type=data').then((res) => {
-        if (res.data.data) {
-          this.like_list = res.data.data
-        } else {
-          this.$message.error('获取点赞列表失败')
-        }
-      })
+      this.$http
+        .get(api_dash.like, {
+          params: {
+            name: 'all',
+            type: 'data',
+          },
+        })
+        .then((res) => {
+          if (res.data.data) {
+            this.like_list = res.data.data
+          } else {
+            this.$message.error('获取点赞列表失败')
+          }
+        })
     },
     handleUpdate(index, name, count) {
       this.$http.put(api_dash.like, { name: name, count: parseInt(count, 10) }).then((res) => {
@@ -69,10 +76,11 @@ export default {
 
 <style scoped>
 /* 暗黑模式的适配 */
-.like-card /deep/ .el-table--enable-row-hover .el-table__body tr:hover>td.el-table__cell {
+.like-card /deep/ .el-table--enable-row-hover .el-table__body tr:hover > td.el-table__cell {
   background-color: var(--body-background);
 }
-.like-card /deep/ .el-table, .el-table__expanded-cell {
+.like-card /deep/ .el-table,
+.like-card /deep/ .el-table.el-table__expanded-cell {
   background-color: var(--body-background);
 }
 </style>

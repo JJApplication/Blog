@@ -25,7 +25,7 @@
 import api_dash from '../api/dashboard'
 
 export default {
-  name: 'Share_card',
+  name: 'share_card',
   data() {
     return {
       share_list: [],
@@ -36,13 +36,20 @@ export default {
   },
   methods: {
     get_share_list() {
-      this.$http.get(api_dash.share + '?name=all&type=data').then((res) => {
-        if (res.data.data) {
-          this.share_list = res.data.data
-        } else {
-          this.$message.error('获取分享列表失败')
-        }
-      })
+      this.$http
+        .get(api_dash.share, {
+          params: {
+            name: 'all',
+            type: 'data',
+          },
+        })
+        .then((res) => {
+          if (res.data.data) {
+            this.share_list = res.data.data
+          } else {
+            this.$message.error('获取分享列表失败')
+          }
+        })
     },
     handleUpdate(index, name, count) {
       this.$http.put(api_dash.share, { name: name, count: parseInt(count, 10) }).then((res) => {
@@ -70,10 +77,11 @@ export default {
 
 <style scoped>
 /* 暗黑模式的适配 */
-.share-card /deep/ .el-table--enable-row-hover .el-table__body tr:hover>td.el-table__cell {
+.share-card /deep/ .el-table--enable-row-hover .el-table__body tr:hover > td.el-table__cell {
   background-color: var(--body-background);
 }
-.share-card /deep/ .el-table, .el-table__expanded-cell {
+.share-card /deep/ .el-table,
+.share-card /deep/ .el-table__expanded-cell {
   background-color: var(--body-background);
 }
 </style>

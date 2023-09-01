@@ -102,8 +102,8 @@
       </div>
     </div>
     <div class="bt-group">
-      <el-button type="primary" icon="el-icon-back" size="small" id="prev" @click="toprev">上一篇</el-button>
-      <el-button type="primary" id="next" size="small" @click="tonext">
+      <el-button type="primary" icon="el-icon-back" size="small" id="prev" @click="to_prev">上一篇</el-button>
+      <el-button type="primary" id="next" size="small" @click="to_next">
         下一篇
         <i class="el-icon-arrow-right el-icon-right"></i>
       </el-button>
@@ -119,7 +119,8 @@ import Bottom_banner from '../components/bottom_banner'
 import customData from '../custom/custom'
 import api_article from '../api/article'
 import { get_code_theme, set_code_theme } from '../store/store'
-import markdownRender from "@/marked/marked";
+import markdownRender from '@/marked/marked'
+import svg from '@/custom/svg'
 
 export default {
   name: 'post',
@@ -331,9 +332,9 @@ export default {
     handleScrollTop() {
       window.scrollTo(0, 0)
     },
-    toprev() {
+    to_prev() {
       if (this.prev !== '') {
-        this.$router.push('/p/' + this.prev)
+        this.$router.push(`/p/${this.prev}`)
         this.init(this.prev)
         this.handleScrollTop()
         this.loading(customData.loading_duration)
@@ -341,9 +342,9 @@ export default {
         this.brother()
       }
     },
-    tonext() {
+    to_next() {
       if (this.next !== '') {
-        this.$router.push('/p/' + this.next)
+        this.$router.push(`/p/${this.next}`)
         this.init(this.next)
         this.handleScrollTop()
         this.loading(customData.loading_duration)
@@ -361,7 +362,7 @@ export default {
       // 每次更换前都移除上一次的样式
       let head = document.getElementsByTagName('head')[0]
       let linkTag = document.getElementById('dynamic-theme')
-      let href_prefix = 'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.6.0/build/styles/'
+      let href_prefix = customData.highlightjs_cdn
       let href = this.theme
         ? href_prefix + this.theme + '.min.css'
         : href_prefix + customData.default_theme + '.min.css'
@@ -399,14 +400,13 @@ export default {
       let body = document.getElementById('markdown-body')
       let heads = body.querySelectorAll('h1, h2, h3')
       for (let h of heads) {
-        let svg_icon =
-          '<svg className="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16"\n                             aria-hidden="true">\n                            <path fill-rule="evenodd"\n                                  d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path>\n</svg>'
+        let svg_icon = svg.postLink
         // 为避免id转义的问题使用text获取
         let text_inner = h.innerText
         let text_id = encodeURI(text_inner)
         // 设置ID
         h.id = text_inner
-        h.innerHTML = `<a class="head-link" href="#${ text_id }">${svg_icon}</a>`+ text_inner
+        h.innerHTML = `<a class="head-link" href="#${text_id}">${svg_icon}</a>` + text_inner
       }
     },
     // 获取全部评论 并进行渲染

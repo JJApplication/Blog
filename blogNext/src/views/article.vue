@@ -14,16 +14,17 @@
           <p style="color: #afafaf; font-size: 1rem; font-weight: bold">
             发布日期: {{ date }}
             <span style="margin: 0 0.75rem">
-                  <el-button type="primary" icon="el-icon-s-home" circle title="回到主页" @click="back"></el-button>
-                  <el-button
-                      type="primary"
-                      icon="el-icon-notebook-2"
-                      circle
-                      title="博客模式"
-                      @click="postMode"
-                  ></el-button>
-                  <el-button type="primary" icon="el-icon-share" circle title="分享" @click="send_shares"></el-button>
-                </span>
+              <el-button type="primary" icon="el-icon-s-home" circle title="回到主页" @click="back"></el-button>
+              <el-button type="primary" icon="el-icon-notebook-2" circle title="博客模式" @click="postMode"></el-button>
+              <el-button type="primary" icon="el-icon-share" circle title="分享" @click="send_shares"></el-button>
+              <el-button
+                type="primary"
+                icon="el-icon-chat-line-square"
+                circle
+                title="评论"
+                @click="comment"
+              ></el-button>
+            </span>
           </p>
         </div>
         <el-card class="tag-card">
@@ -38,21 +39,33 @@
           <div slot="header" class="clearfix">
             <span>统计</span>
           </div>
-          <p class="count-item">阅读次数: <span class="count">{{ post_views }}</span></p>
-          <p class="count-item">评论次数: <span class="count">{{ comments_count }}</span></p>
-          <p class="count-item">点赞次数: <span class="count">{{ post_likes }}</span></p>
-          <p class="count-item">分享次数: <span class="count">{{ post_shares }}</span></p>
+          <p class="count-item">
+            阅读次数:
+            <span class="count">{{ post_views }}</span>
+          </p>
+          <p class="count-item">
+            评论次数:
+            <span class="count">{{ comments_count }}</span>
+          </p>
+          <p class="count-item">
+            点赞次数:
+            <span class="count">{{ post_likes }}</span>
+          </p>
+          <p class="count-item">
+            分享次数:
+            <span class="count">{{ post_shares }}</span>
+          </p>
         </el-card>
         <el-card class="float-toc">
           <div slot="header" class="clearfix">
             <span>文章目录</span>
           </div>
           <el-tree
-              :data="toc"
-              @node-click="handleNodeClick"
-              :highlight-current="true"
-              :default-expand-all="true"
-              :check-on-click-node="true"
+            :data="toc"
+            @node-click="handleNodeClick"
+            :highlight-current="true"
+            :default-expand-all="true"
+            :check-on-click-node="true"
           ></el-tree>
         </el-card>
       </div>
@@ -83,19 +96,19 @@
               </div>
               <!--                    评论列表-->
               <div
-                  style="border: 1px solid var(--comment-border); margin-bottom: 0.6rem; border-radius: 4px"
-                  v-for="c in comments_list"
-                  :key="c.primary_id"
+                style="border: 1px solid var(--comment-border); margin-bottom: 0.6rem; border-radius: 4px"
+                v-for="c in comments_list"
+                :key="c.primary_id"
               >
                 <div
-                    style="
-                      background-color: var(--comment-title-bg);
-                      color: var(--comment-color);
-                      font-size: 0.85rem;
-                      font-weight: bold;
-                      padding: 10px;
-                      border-bottom: 1px solid var(--comment-border);
-                    "
+                  style="
+                    background-color: var(--comment-title-bg);
+                    color: var(--comment-color);
+                    font-size: 0.85rem;
+                    font-weight: bold;
+                    padding: 10px;
+                    border-bottom: 1px solid var(--comment-border);
+                  "
                 >
                   <span style="color: var(--comment-user); margin-right: 0.6rem">{{ c.user ? c.user : '匿名' }}</span>
                   <span>评论于 {{ c.date }}</span>
@@ -109,14 +122,14 @@
                 <el-tab-pane label="撰写评论">
                   <div>
                     <el-input
-                        id="raw_textarea"
-                        type="textarea"
-                        show-word-limit
-                        clearable
-                        maxlength="200"
-                        :rows="4"
-                        placeholder="有什么想说的，留下你的评论吧✏️"
-                        v-model="comment_text"
+                      id="raw_textarea"
+                      type="textarea"
+                      show-word-limit
+                      clearable
+                      maxlength="200"
+                      :rows="4"
+                      placeholder="有什么想说的，留下你的评论吧✏️"
+                      v-model="comment_text"
                     ></el-input>
                   </div>
                 </el-tab-pane>
@@ -124,18 +137,18 @@
                   <div style="padding: 6px" v-html="preview_comment" class="markdown-body"></div>
                 </el-tab-pane>
                 <el-input
-                    v-model="comment_who"
-                    maxlength="20"
-                    clearable
-                    placeholder="表明你是谁😎"
-                    size="mini"
-                    style="width: 10rem; margin-top: 1rem"
+                  v-model="comment_who"
+                  maxlength="20"
+                  clearable
+                  placeholder="表明你是谁😎"
+                  size="mini"
+                  style="width: 10rem; margin-top: 1rem"
                 ></el-input>
                 <el-button
-                    type="primary"
-                    size="mini"
-                    @click="send_comment"
-                    style="float: right; margin-top: 1rem; border: none"
+                  type="primary"
+                  size="mini"
+                  @click="send_comment"
+                  style="float: right; margin-top: 1rem; border: none"
                 >
                   发布
                 </el-button>
@@ -161,6 +174,8 @@ import customData from '../custom/custom'
 import api_article from '../api/article'
 import { get_code_theme, set_code_theme } from '../store/store'
 import markdownRender from '@/marked/marked'
+import linkTo from '@/router/to'
+import svg from '@/custom/svg'
 
 export default {
   name: 'article',
@@ -259,7 +274,7 @@ export default {
         H6: 6,
       },
       toc: [],
-      canDisplay: true
+      canDisplay: true,
     }
   },
   created() {
@@ -272,10 +287,10 @@ export default {
     },
   },
   mounted() {
-    this.canDisplay = document.body.clientWidth >= 1440;
+    this.canDisplay = document.body.clientWidth >= 1440
     window.onresize = () => {
-      this.canDisplay = document.body.clientWidth >= 1440;
-      if (this.canDisplay && !document.getElementById("wrapper")) {
+      this.canDisplay = document.body.clientWidth >= 1440
+      if (this.canDisplay && !document.getElementById('wrapper')) {
         this.initPage()
       }
     }
@@ -289,27 +304,27 @@ export default {
       let _this = this
       this.loading(customData.loading_duration * 5, false)
       this.$http
-          .get(api_article.api_article_more, { params: { name: this.url } })
-          .then((res) => {
-            let content = res.data.data['content']
-            _this.title = res.data.data['title']
-            document.title = _this.title + ' • Blog'
-            _this.date = res.data.data['date']
-            _this.tags = res.data.data.tags.split(' ')
-            _this.mk(content)
-            _this.$nextTick(() => {
-              this.theme_control = true
-              let pres = document.getElementsByTagName('pre')
-              for (let i = 0; i < pres.length; i++) {
-                pres[i].classList.add('hljs')
-              }
-              this.loading(0, true)
-            })
-          })
-          .catch((err) => {
+        .get(api_article.api_article_more, { params: { name: this.url } })
+        .then((res) => {
+          let content = res.data.data['content']
+          _this.title = res.data.data['title']
+          document.title = _this.title + ' • Blog'
+          _this.date = res.data.data['date']
+          _this.tags = res.data.data.tags.split(' ')
+          _this.mk(content)
+          _this.$nextTick(() => {
             this.theme_control = true
-            _this.$message.error('出现错误了，请求文章失败')
+            let pres = document.getElementsByTagName('pre')
+            for (let i = 0; i < pres.length; i++) {
+              pres[i].classList.add('hljs')
+            }
+            this.loading(0, true)
           })
+        })
+        .catch((err) => {
+          this.theme_control = true
+          _this.$message.error('出现错误了，请求文章失败')
+        })
       this.get_comments()
       this.get_likes()
       this.get_shares()
@@ -392,7 +407,7 @@ export default {
       // 每次更换前都移除上一次的样式
       let head = document.getElementsByTagName('head')[0]
       let linkTag = document.getElementById('dynamic-theme')
-      let href_prefix = 'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.6.0/build/styles/'
+      let href_prefix = customData.highlightjs_cdn
       let href = this.theme
         ? href_prefix + this.theme + '.min.css'
         : href_prefix + customData.default_theme + '.min.css'
@@ -430,8 +445,7 @@ export default {
       let body = document.getElementById('markdown-body')
       let heads = body.querySelectorAll('h1, h2, h3')
       for (let h of heads) {
-        let svg_icon =
-          '<svg className="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16"\n   aria-hidden="true">\n    <path fill-rule="evenodd"\n                                  d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path>\n</svg>'
+        let svg_icon = svg.postLink
         // 为避免id转义的问题使用text获取
         let text_inner = h.innerText
         let text_id = encodeURI(text_inner)
@@ -443,7 +457,7 @@ export default {
     },
     // 获取全部评论 并进行渲染
     get_comments() {
-      this.$http.get(api_article.api_article_comments + '?name=' + this.url).then((res) => {
+      this.$http.get(api_article.api_article_comments, { params: { name: this.url } }).then((res) => {
         let d = res.data.data
         if (d) {
           this.comments_count = d.length
@@ -487,14 +501,14 @@ export default {
         })
     },
     get_likes() {
-      this.$http.get(api_article.api_article_likes + '?name=' + this.url).then((res) => {
+      this.$http.get(api_article.api_article_likes, { params: { name: this.url } }).then((res) => {
         if (res.data.data && res.data.data !== 'failed') {
           this.post_likes = res.data.data
         }
       })
     },
     get_shares() {
-      this.$http.get(api_article.api_article_shares + '?name=' + this.url).then((res) => {
+      this.$http.get(api_article.api_article_shares, { params: { name: this.url } }).then((res) => {
         if (res.data.data && res.data.data !== 'failed') {
           this.post_shares = res.data.data
         }
@@ -538,7 +552,7 @@ export default {
       })
     },
     get_views() {
-      this.$http.get(api_article.api_article_views + '?name=' + this.url).then((res) => {
+      this.$http.get(api_article.api_article_views, { params: { name: this.url } }).then((res) => {
         if (res.data.data) {
           this.post_views = res.data.data
         }
@@ -586,6 +600,9 @@ export default {
     },
     handleNodeClick(data) {
       window.location.href = `#${encodeURI(data.label)}`
+    },
+    comment() {
+      linkTo('#user-comment')
     },
   },
 }
@@ -659,7 +676,7 @@ export default {
   color: var(--card-color);
 }
 .left-row /deep/ .el-tree-node__content:hover,
-.left-row /deep/ .el-tree--highlight-current .el-tree-node.is-current>.el-tree-node__content {
+.left-row /deep/ .el-tree--highlight-current .el-tree-node.is-current > .el-tree-node__content {
   background-color: var(--tree-select-bg);
   color: var(--card-color);
 }

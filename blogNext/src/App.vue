@@ -54,6 +54,16 @@ body {
   font-display: fallback;
   font-style: normal;
 }
+@media (prefers-color-scheme: light) {
+  .svg.link {
+    fill: #2C2F2D;
+  }
+}
+@media (prefers-color-scheme: dark) {
+  .svg.link {
+    fill: #d1556f;
+  }
+}
 /* 覆盖全部backtop样式 */
 .el-backtop {
   background-color: var(--backtop-bg);

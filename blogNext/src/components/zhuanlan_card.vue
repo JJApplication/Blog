@@ -178,13 +178,14 @@ export default {
 
 <style scoped>
 /* 暗黑模式的适配 */
-.zhuanlan-card /deep/ .el-table--enable-row-hover .el-table__body tr:hover>td.el-table__cell {
+.zhuanlan-card /deep/ .el-table--enable-row-hover .el-table__body tr:hover > td.el-table__cell {
   background-color: var(--body-background);
 }
 .zhuanlan-card /deep/ .el-textarea__inner {
   background-color: var(--comment-bg);
 }
-.zhuanlan-card /deep/ .el-table, .el-table__expanded-cell {
+.zhuanlan-card /deep/ .el-table,
+.zhuanlan-card /deep/ .el-table__expanded-cell {
   background-color: var(--body-background);
 }
 </style>

@@ -24,37 +24,47 @@
 </template>
 
 <script>
-import Post_card from '../components/post_card'
-import Zhuanlan_card from '../components/zhuanlan_card'
-import Message_card from '../components/message_card'
-import View_card from '../components/view_card'
-import Share_card from '../components/share_card'
-import Like_card from '../components/like_card'
-import Comment_card from '../components/comment_card'
-import Show_card from '../components/show_card'
-import Image_card from "@/components/image_card.vue";
+import post_card from '../components/post_card'
+import zhuanlan_card from '../components/zhuanlan_card'
+import message_card from '../components/message_card'
+import view_card from '../components/view_card'
+import share_card from '../components/share_card'
+import like_card from '../components/like_card'
+import comment_card from '../components/comment_card'
+import show_card from '../components/show_card'
+import image_card from '@/components/image_card.vue'
 export default {
   name: 'dashboard',
-  components: { Post_card, Zhuanlan_card, Message_card, View_card, Like_card, Share_card, Comment_card, Show_card, Image_card },
+  components: {
+    post_card,
+    zhuanlan_card,
+    message_card,
+    view_card,
+    like_card,
+    share_card,
+    comment_card,
+    show_card,
+    image_card,
+  },
   data() {
     return {
       activeIndex: '1',
       dynamic_com: '',
       components_map: {
-        '1': 'Post_card',
-        '2-1': 'View_card',
-        '2-2': 'Share_card',
-        '2-3': 'Like_card',
-        '2-4': 'Comment_card',
-        '2-5': 'Show_card',
-        '3': 'Zhuanlan_card',
-        '4': 'Message_card',
-        '5': 'Image_card'
+        '1': 'post_card',
+        '2-1': 'view_card',
+        '2-2': 'share_card',
+        '2-3': 'like_card',
+        '2-4': 'comment_card',
+        '2-5': 'show_card',
+        '3': 'zhuanlan_card',
+        '4': 'message_card',
+        '5': 'image_card',
       },
     }
   },
   mounted() {
-    this.dynamic_com = 'Post_card'
+    this.dynamic_com = 'post_card'
   },
   methods: {
     handleSelect(key, keyPath) {
@@ -76,13 +86,13 @@ export default {
   padding: 10px;
   text-align: left;
 }
-.dashboard /deep/ .el-menu--horizontal>.el-menu-item.is-active,
-.dashboard /deep/ .el-menu--horizontal>.el-menu-item:not(.is-disabled):focus {
+.dashboard /deep/ .el-menu--horizontal > .el-menu-item.is-active,
+.dashboard /deep/ .el-menu--horizontal > .el-menu-item:not(.is-disabled):focus {
   background-color: var(--header-menu-bg);
   color: var(--header-menu-text-active);
 }
-.dashboard /deep/ .el-menu--horizontal>.el-menu-item:not(.is-disabled):hover,
-.dashboard /deep/ .el-menu--horizontal>.el-submenu .el-submenu__title:hover {
+.dashboard /deep/ .el-menu--horizontal > .el-menu-item:not(.is-disabled):hover,
+.dashboard /deep/ .el-menu--horizontal > .el-submenu .el-submenu__title:hover {
   background-color: var(--header-menu-bg);
   color: var(--header-menu-text);
 }

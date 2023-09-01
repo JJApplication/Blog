@@ -49,7 +49,7 @@ import customData from '../custom/custom'
 import api_article from '../api/article'
 import Top_banner from '../components/top_banner'
 import Bottom_banner from '../components/bottom_banner'
-import markdownRender from "@/marked/marked";
+import markdownRender from '@/marked/marked'
 export default {
   name: 'archive-page',
   components: { Top_banner, Bottom_banner },
@@ -64,14 +64,18 @@ export default {
     }
   },
   mounted() {
-    this.getarticles()
+    this.get_articles()
     this.loading(customData.loading_duration)
   },
   methods: {
-    getarticles() {
+    get_articles() {
       let _this = this
       this.$http
-        .get(api_article.api_article_archives + '?date=' + _this.title)
+        .get(api_article.api_article_archives, {
+          params: {
+            date: _this.title,
+          },
+        })
         .then((res) => {
           _this.posts = res.data.data
           this.postSlice = this.posts.slice(0, 5)

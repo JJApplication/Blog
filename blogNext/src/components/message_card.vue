@@ -59,9 +59,9 @@ export default {
       let data = { id: id }
       this.$http.delete(api_dash.message, { data: data }).then((res) => {
         if (res.data.data === 'fail') {
-          this.$message.error('留言' + id + '删除失败')
+          this.$message.error(`留言${id}删除失败`)
         } else {
-          this.$message.success('留言' + id + '删除成功')
+          this.$message.success(`留言${id}删除成功`)
           this.get_message_list()
         }
       })
@@ -73,9 +73,9 @@ export default {
       }
       this.$http.put(api_dash.message, data).then((res) => {
         if (res.data.data === 'fail') {
-          this.$message.error('留言' + id + '更新失败')
+          this.$message.error(`留言${id}更新失败`)
         } else {
-          this.$message.success('留言' + id + '更新成功')
+          this.$message.success(`留言${id}更新成功`)
           this.get_message_list()
         }
       })
@@ -86,7 +86,7 @@ export default {
 
 <style scoped>
 /* 暗黑模式的适配 */
-.message_card /deep/ .el-table--enable-row-hover .el-table__body tr:hover>td.el-table__cell {
+.message_card /deep/ .el-table--enable-row-hover .el-table__body tr:hover > td.el-table__cell {
   background-color: var(--body-background);
 }
 .message_card /deep/ .el-table,

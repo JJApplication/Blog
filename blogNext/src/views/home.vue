@@ -111,7 +111,7 @@
               </el-collapse-item>
               <el-collapse-item title="更多标签" name="2">
                 <div class="tags">
-                  <el-tag v-for="item in tags_more" :key="item" type="success" effect="dark" @click="getbytag(item)">
+                  <el-tag v-for="item in tags_more" :key="item" type="success" effect="dark" @click="get_by_tag(item)">
                     {{ item }}
                   </el-tag>
                 </div>
@@ -119,7 +119,7 @@
             </el-collapse>
           </div>
           <div class="tags">
-            <el-tag v-for="item in tags_less" :key="item" type="success" effect="dark" @click="getbytag(item)">
+            <el-tag v-for="item in tags_less" :key="item" type="success" effect="dark" @click="get_by_tag(item)">
               {{ item }}
             </el-tag>
           </div>
@@ -185,7 +185,7 @@
               :pager-count="pagecount"
               :page-size="8"
               layout="prev, pager, next"
-              @current-change="reloadpage"
+              @current-change="reload_page"
               :total="posts.total"
             ></el-pagination>
           </div>
@@ -287,14 +287,14 @@ export default {
     }
   },
   mounted() {
-    this.loadpage(1)
-    this.gettags()
+    this.load_page(1)
+    this.get_tags()
     let _this = this
     window.onresize = function () {
       _this.swidth = document.body.clientWidth
     }
     this.re()
-    _this.whatdays()
+    _this.what_days()
   },
   methods: {
     linkTo,
@@ -305,7 +305,7 @@ export default {
     tags_to_list(tags) {
       return tags.split(' ')
     },
-    gettags() {
+    get_tags() {
       let _this = this
       _this.$http
         .get(api_tags.api_tags_all)
@@ -328,14 +328,14 @@ export default {
           this.$message.error('出现错误了，请求标签失败')
         })
     },
-    getbytag(tag) {
+    get_by_tag(tag) {
       this.$router.push('/t/' + tag)
     },
-    getarticles() {
-      this.loadpage(1)
+    get_articles() {
+      this.load_page(1)
     },
-    reloadpage(now) {
-      this.loadpage(now)
+    reload_page(now) {
+      this.load_page(now)
     },
     mk(code) {
       this.$nextTick(() => {
@@ -350,7 +350,7 @@ export default {
       })
       return markdownRender(code)
     },
-    loadpage(n) {
+    load_page(n) {
       this.$http
         .get(api_article.api_article_list, { params: { p: n } })
         .then((res) => {
@@ -399,7 +399,7 @@ export default {
         this.$router.push('/search')
       }
     },
-    whatdays() {
+    what_days() {
       var dateSpan, iDays
       let Date1 = new Date()
       this.year = Date1.getFullYear()

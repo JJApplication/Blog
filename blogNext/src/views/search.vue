@@ -8,9 +8,9 @@
     </div>
     <div class="wrapper">
       <div class="articlelists">
-        <div v-for="a in posts" :key="a.title" class="post animated slideInDown">
+        <div v-for="(a, i) in posts" :key="`${a.title}-${i}`" class="post animated slideInDown">
           <div style="position: relative">
-            <a class="post-a" :href="'/p/' + a.name">{{ a.title }}</a>
+            <a class="post-a" :href="`/p/${a.name}`">{{ a.title }}</a>
             <span class="post-date" v-if="a.date.indexOf('-') !== -1">{{ a.date }}</span>
           </div>
           <div class="markdown-body abstract" v-html="mk(a.abstract)"></div>
@@ -19,7 +19,7 @@
               v-for="t in tags_to_list(a.tags)"
               :key="t"
               effect="dark"
-              :content="'标签: ' + t"
+              :content="`标签: ${t}`"
               :enterable="false"
               placement="bottom-start"
             >
@@ -27,14 +27,14 @@
                 type="info"
                 size="small"
                 style="cursor: pointer; margin-right: 8px"
-                @click="$router.push('/t/' + t)"
+                @click="$router.push(`/t/${t}`)"
               >
                 {{ t }}
               </el-tag>
             </el-tooltip>
           </div>
         </div>
-        <div v-if="posts == null">
+        <div v-if="!posts">
           <p class="noresult">没有找到你想要的结果😭</p>
         </div>
       </div>
@@ -49,7 +49,7 @@ import customData from '../custom/custom'
 import api_article from '../api/article'
 import Top_banner from '../components/top_banner'
 import Bottom_banner from '../components/bottom_banner'
-import markdownRender from "@/marked/marked";
+import markdownRender from '@/marked/marked'
 export default {
   name: 'search',
   components: { Bottom_banner, Top_banner },

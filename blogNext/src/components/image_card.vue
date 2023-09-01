@@ -57,16 +57,20 @@ export default {
     },
     handleDelete(index, name) {
       this.$http
-        .post(api_image.delete, {},{
-          params: {
-            file: name,
+        .post(
+          api_image.delete,
+          {},
+          {
+            params: {
+              file: name,
+            },
           },
-        })
+        )
         .then((res) => {
           if (res.status !== 200) {
-            this.$message.error('图片' + name + '删除失败')
+            this.$message.error(`图片${name}删除失败`)
           } else {
-            this.$message.success('图片' + name + '删除成功')
+            this.$message.success(`图片${name}删除成功`)
             this.get_image_list()
           }
         })

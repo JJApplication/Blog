@@ -49,7 +49,8 @@ export default {
   color: var(--banner-title-color);
   padding: 8px 10px;
   cursor: pointer;
-  font-family: 'Lato', "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+  font-family: 'Lato', 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', '微软雅黑',
+    Arial, sans-serif;
 }
 .header /deep/ .el-divider {
   background-color: var(--banner-divider-background);

@@ -101,6 +101,7 @@
         </el-col>
       </el-row>
       <v-md-editor
+        ref="editor"
         v-model="post_open_content"
         :disabled-menus="[]"
         @upload-image="handleUploadImage"
@@ -325,13 +326,15 @@ export default {
       })
     },
     update_post_all() {
+      // 避免没有点击保存按钮，点击更新时直接从ref中取数据
+      const current_content = this.$refs.editor.value
       // 更新带正文的文章 type=editor
-      let url = api_dash.post + '?type=editor'
-      let data = {
+      const url = api_dash.post + '?type=editor'
+      const data = {
         name: this.post_open_name,
         title: this.post_open_title,
         tags: this.post_open_tags,
-        content: this.post_open_content,
+        content: current_content ? current_content : this.post_open_content,
       }
       this.$http.put(url, data).then((res) => {
         if (res.data.data !== 'fail') {
@@ -488,6 +491,9 @@ ${res.data.data.content}`
   font-size: 46px;
   margin: 10px 0 10px;
 }
+.post-card /deep/ .el-input__inner {
+  background-color: #fff;
+}
 /* 暗黑模式的适配 */
 .post-card /deep/ .el-upload-dragger {
   background-color: var(--body-background);
@@ -496,7 +502,7 @@ ${res.data.data.content}`
   background-color: var(--body-background);
 }
 .post-card /deep/ .el-table,
-.el-table__expanded-cell {
+.post-card /deep/ .el-table__expanded-cell {
   background-color: var(--body-background);
 }
 </style>

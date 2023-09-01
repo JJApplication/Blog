@@ -27,18 +27,18 @@ export default {
           tags.forEach((d) => {
             realTags.push(d.tag)
           })
-          _this.tagsList = realTags;
+          _this.tagsList = realTags
         })
         .catch((err) => {
           this.$message.error('出现错误了，请求标签失败')
         })
     },
     back() {
-      this.$router.push("/")
+      this.$router.push('/')
     },
     link(tag) {
       this.$router.push(`/t/${encodeURI(tag)}`)
-    }
+    },
   },
   mounted() {
     this.getTags()
@@ -66,5 +66,4 @@ export default {
   border: none;
   transition: all 0.3s ease;
 }
-
 </style>

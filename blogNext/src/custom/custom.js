@@ -18,6 +18,7 @@ const customData = {
   project_des: 'Mgek项目记录生活中的灵感',
   project_url: 'http://mgek.cc',
   jjapplication_url: 'https://github.com/jjapplication',
+  blog_project_url: 'https://github.com/landers1037/blog',
   bottom_tag: 'By Landers',
   bottom_url: 'http://renj.io',
   bottom_tag2: 'Github',
@@ -28,6 +29,7 @@ const customData = {
   start_date: '2017/7/1',
   dashboard_count: 1,
   // default theme support github|monokai|atom|xterm|solarized|xcode
+  highlightjs_cdn: 'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.6.0/build/styles/',
   default_theme: 'xt256',
   message_duration: 1500,
   loading_duration: 1000,
