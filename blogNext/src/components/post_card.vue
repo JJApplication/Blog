@@ -372,8 +372,6 @@ tags: [${tags}]
 categories: [${cates}]
 abstract: ""
 ---
-${p.abstract}
-<!--more-->
 ${p.content}`
             zip.file(p.name + '.md', data)
           }
@@ -404,8 +402,6 @@ tags: [${tags}]
 categories: [${cates}]
 abstract: ""
 ---
-${res.data.data.abstract}
-<!--more-->
 ${res.data.data.content}`
           let file = new File([file_data], file_name, { type: 'text/plain;charset=utf-8' })
           saveAs(file)
