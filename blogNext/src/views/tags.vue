@@ -1,7 +1,7 @@
 <template>
   <div class="tags">
     <div class="list">
-      <el-tag class="tag" v-for="tag in tagsList" @click="link(tag)" effect="dark" :key="tag">{{ tag }}</el-tag>
+      <el-tag class="tag animated fadeIn" v-for="tag in tagsList" @click="link(tag)" effect="dark" :key="tag">{{ tag }}</el-tag>
     </div>
     <el-button type="primary" @click="back">返回主页</el-button>
   </div>

@@ -4,16 +4,17 @@
     <div class="box">
       <p>在这里写下你的留言</p>
       <div class="messageBox">
-        <ul v-for="m in messages" id="mes" class="animated fadeInDown" style="animation-delay: 0.1s">
-          <i style="font-size: 20px; padding-right: 6px" class="el-icon-chat-round"></i>
-          {{
-            m.message
-          }}
+        <ul v-for="m in messages" :key="m.primary_id" class="message-item animated fadeInDown" style="animation-delay: 0.1s">
+          <div>
+            <i style="font-size: 1rem; padding-right: 0.5rem" class="el-icon-chat-round"></i>
+            <span class="message-content">{{ m.message }}</span>
+            <span class="message-date">{{ m.date }}</span>
+          </div>
         </ul>
       </div>
       <el-input
         type="textarea"
-        class="yourmes"
+        class="yourmes animated fadeIn"
         placeholder="请输入留言"
         maxlength="300"
         show-word-limit
@@ -21,7 +22,7 @@
         v-model="textarea"
       ></el-input>
     </div>
-    <el-button class="btnSend" icon="el-icon-chat-square" @click="sendmes">发表留言</el-button>
+    <el-button class="btnSend animated fadeIn" icon="el-icon-chat-square" @click="sendmes">发表留言</el-button>
   </div>
 </template>
 
@@ -113,10 +114,18 @@ export default {
   box-shadow: 0 0 10px 2px var(--post-box);
   background-color: var(--post-background);
 }
-.messageBox #mes {
+.messageBox .message-item {
   padding: 6px 10px;
   word-break: break-all;
   word-wrap: break-word;
+  margin-bottom: 0.5rem;
+}
+.messageBox .message-item:last-child {
+  margin-bottom: 0;
+}
+.messageBox .message-date {
+  margin-left: 0.75rem;
+  color: var(--comment-color);
 }
 .yourmes {
   max-width: 640px;

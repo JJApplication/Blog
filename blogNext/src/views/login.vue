@@ -1,6 +1,6 @@
 <template>
   <div id="login">
-    <el-card>
+    <el-card class="animated fadeInDown">
       <h1 style="color: #808080; margin: 5rem 0; font-size: 3rem">
         Blog
         <span style="color: #378de5">Dashboard</span>

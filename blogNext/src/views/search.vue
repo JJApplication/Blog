@@ -1,7 +1,7 @@
 <template>
   <div class="search">
     <top_banner></top_banner>
-    <div class="sebar">
+    <div class="sebar animated fadeInDown">
       <el-input placeholder="请输入查找内容" v-model="word">
         <el-button slot="append" icon="el-icon-search" @click="search"></el-button>
       </el-input>

@@ -7,7 +7,7 @@
     </div>
     <div v-if="canDisplay" class="article-body">
       <div class="left-row">
-        <div class="title-card">
+        <div class="title-card animated fadeInDown">
           <div class="title">
             <p>{{ title }}</p>
           </div>
@@ -27,7 +27,7 @@
             </span>
           </p>
         </div>
-        <el-card class="tag-card">
+        <el-card class="tag-card animated fadeInDown">
           <div slot="header" class="clearfix">
             <span>标签</span>
           </div>
@@ -35,7 +35,7 @@
             <a style="color: #909399" :href="`/t/${tag}`">{{ tag }}</a>
           </el-tag>
         </el-card>
-        <el-card class="count-card">
+        <el-card class="count-card animated fadeInDown">
           <div slot="header" class="clearfix">
             <span>统计</span>
           </div>
@@ -56,7 +56,7 @@
             <span class="count">{{ post_shares }}</span>
           </p>
         </el-card>
-        <el-card class="float-toc">
+        <el-card class="float-toc animated fadeInDown">
           <div slot="header" class="clearfix">
             <span>文章目录</span>
           </div>
