@@ -1,5 +1,5 @@
 <template>
-  <div class="article-detail">
+  <div class="article-detail" id="article-detail">
     <div v-if="canDisplay" id="theme" v-show="theme_control">
       <el-select v-model="theme" placeholder="代码主题" @change="change_theme">
         <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option>
@@ -69,7 +69,7 @@
           ></el-tree>
         </el-card>
       </div>
-      <div class="right-row">
+      <div class="right-row" :class="{ fitHeight: fitHeight }">
         <div id="wrapper" class="wrapper animated fadeIn">
           <div class="markdown-body gallery" v-html="post" id="markdown-body"></div>
           <!--评论区-->
@@ -275,6 +275,8 @@ export default {
       },
       toc: [],
       canDisplay: true,
+      // 文章高度
+      fitHeight: false,
     }
   },
   created() {
@@ -289,6 +291,7 @@ export default {
   mounted() {
     this.canDisplay = document.body.clientWidth >= 1440
     window.onresize = () => {
+      this.fitHeight = (document.body.clientHeight < document.getElementById("article-detail").clientHeight)
       this.canDisplay = document.body.clientWidth >= 1440
       if (this.canDisplay && !document.getElementById('wrapper')) {
         this.initPage()
@@ -298,6 +301,9 @@ export default {
       return
     }
     this.initPage()
+    this.$nextTick(() => {
+      this.fitHeight = (document.body.clientHeight < document.getElementById("article-detail").clientHeight)
+    })
   },
   methods: {
     initPage() {
@@ -663,6 +669,10 @@ export default {
   overflow-y: auto;
   cursor: pointer;
 }
+.fitHeight {
+  height: calc(100vh - 5rem);
+}
+
 .left-row /deep/ .el-card {
   background-color: var(--card-bg);
   color: var(--card-color);
