@@ -635,6 +635,7 @@ export default {
 .article-body {
   width: 100%;
   display: flex;
+  justify-content: space-between;
 }
 .left-row {
   text-align: left;
@@ -661,16 +662,18 @@ export default {
 .left-row .float-toc {
   margin-top: 1rem;
   min-width: 25rem;
+  height: calc(100vh - 34rem);
+  overflow-y: auto;
 }
 .right-row {
-  width: calc(100% - 25rem);
-  height: calc(100vh - 8rem);
+  width: calc(100% - 28rem);
+  height: calc(100vh - 4.75rem);
   padding-bottom: 2rem;
   overflow-y: auto;
   cursor: pointer;
 }
 .fitHeight {
-  height: calc(100vh - 5rem);
+  height: calc(100vh - 4.75rem);
 }
 
 .left-row /deep/ .el-card {
@@ -742,15 +745,15 @@ export default {
 .wrapper {
   text-align: left;
   box-shadow: 0 1px 10px 2px var(--post-box);
-  border-radius: 2px;
-  max-width: 980px;
+  border-radius: 4px;
+  max-width: 1024px;
   margin: 15px auto 0;
   background-color: var(--post-background);
 }
 .markdown-body {
   box-sizing: border-box;
   min-width: 200px;
-  max-width: 980px;
+  max-width: 1024px;
   margin: 0 auto;
   padding: 25px;
   color: var(--text-color);
@@ -818,6 +821,18 @@ export default {
 }
 #comments {
   margin-bottom: 1rem;
+}
+</style>
+//表格背景色的适配
+<style>
+.markdown-body table tr {
+  background-color: var(--post-background);
+}
+.markdown-body table td, .markdown-body table th {
+  border-color: var(--border-color);
+}
+.markdown-body table tr:nth-child(2n) {
+  background-color: var(--body-background);
 }
 </style>
 <style>

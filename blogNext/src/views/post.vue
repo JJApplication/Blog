@@ -682,6 +682,18 @@ export default {
   margin-bottom: 1rem;
 }
 </style>
+//表格背景色的适配
+<style>
+.markdown-body table tr {
+  background-color: var(--post-background);
+}
+.markdown-body table td, .markdown-body table th {
+  border-color: var(--border-color);
+}
+.markdown-body table tr:nth-child(2n) {
+  background-color: var(--body-background);
+}
+</style>
 <style>
 @import '../custom/custom.css';
 </style>
