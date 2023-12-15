@@ -149,6 +149,12 @@
               <div style="position: relative">
                 <a class="post-a" :href="`/p/${a.name}`">{{ a.title }}</a>
                 <i
+                    title="私密文章"
+                    class="post-lock el-icon-lock"
+                    v-if="a.lock"
+                >
+                </i>
+                <i
                   title="阅读模式"
                   class="post-view el-icon-reading"
                   v-if="a.date.indexOf('-') !== -1"

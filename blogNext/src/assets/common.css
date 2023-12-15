@@ -61,6 +61,19 @@ h1, h2, h3, h4, h5, h6 {
     color: var(--post-title);
 }
 
+.post .post-lock {
+    position: absolute;
+    right: 100px;
+    top: 4px;
+    cursor: pointer;
+    color: var(--post-date);
+    font-size: 14px;
+}
+
+.post .post-lock:hover {
+    color: var(--post-lock);
+}
+
 /*文章正文类*/
 .markdown-body p {
     margin-bottom: 10px!important;

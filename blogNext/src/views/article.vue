@@ -327,7 +327,7 @@ export default {
             this.loading(0, true)
           })
         })
-        .catch((err) => {
+        .catch(e => {
           this.theme_control = true
           _this.$message.error('出现错误了，请求文章失败')
         })

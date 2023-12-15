@@ -22,7 +22,7 @@ var (
 	useRedis bool
 )
 
-func Cache(name string) interface{} {
+func Cache(name string) article.DB_BLOG_POST {
 	getFlag()
 	if useRedis {
 		hit, e := getFromRedis(name)

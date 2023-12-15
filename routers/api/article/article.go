@@ -26,6 +26,10 @@ func Getarticle(c *gin.Context) {
 	if name != "" {
 		data := middleware.Cache(name)
 		code := err.SUCCESS
+		// 根据session中的登入信息判断是否有权限访问私密文章s
+		if data.Lock > 0 && !middleware.CheckToken(c) {
+			c.JSON(http.StatusUnauthorized, "")
+		}
 		c.JSON(http.StatusOK, gin.H{
 			"code": code,
 			"msg":  err.GetMsg(code),

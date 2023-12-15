@@ -31,6 +31,13 @@ request.interceptors.response.use(
     return response
   },
   (error) => {
+    if (error.response.status === 401 || error.response.status === '401') {
+      Message.error('无权限查看私密文章')
+      setTimeout(() => {
+        router.back()
+      }, 1500)
+      return
+    }
     if (error.response && error.response.status && error.response.status === 403) {
       console.log('无权限访问接口')
       Message.error('无权限访问接口')

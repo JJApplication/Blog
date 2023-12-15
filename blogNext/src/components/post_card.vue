@@ -61,6 +61,8 @@
         <template slot="prepend">标签</template>
       </el-input>
       <el-switch style="margin-bottom: 20px" v-model="pin" active-text="置顶" inactive-text="取消置顶"></el-switch>
+      <br>
+      <el-switch style="margin-bottom: 20px" v-model="lock" active-text="私密" inactive-text="取消私密"></el-switch>
       <el-upload
         name="uploadmd"
         :action="api_post_update"
@@ -168,6 +170,7 @@ export default {
       date_plus: '',
       tags: '',
       pin: false,
+      lock: false,
       // post open
       post_open_name: '',
       post_open_title: '',
@@ -273,6 +276,7 @@ export default {
           this.date_plus = d.date_plus
           this.tags = d.tags
           this.pin = d.pin === 1
+          this.lock = d.lock === 1
           this.post_edit = true
         } else {
           this.$message.error('获取文章内容失败')
@@ -314,6 +318,7 @@ export default {
         date: this.date_plus,
         tags: this.tags,
         pin: this.pin ? 1 : 0,
+        lock: this.lock ? 1: 0,
       }
       this.$http.put(api_dash.post + '?type=' + type, data).then((res) => {
         if (res.data.data === 'success') {

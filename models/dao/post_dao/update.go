@@ -90,7 +90,7 @@ func PostSetPin(name string) error {
 // PostUpdateMap dashboard使用的更新
 // 由于支持更换URI 所以区分name newname
 // 更新pin时如果为1的已经存在则将其先更新为0
-func PostUpdateMap(name, newname, title, date, tags string, pin int) error {
+func PostUpdateMap(name, newname, title, date, tags string, pin int, lock int) error {
 	// 前置处理
 	if pin == 1 {
 		e := models.BlogDB.Model(&article.DB_BLOG_POST{}).Where("pin = ?", 1).Update("pin", 0).Error
@@ -112,6 +112,7 @@ func PostUpdateMap(name, newname, title, date, tags string, pin int) error {
 		"tags":      tags,
 		"update":    utils.GetDatePlus(),
 		"pin":       pin,
+		"lock":      lock,
 	}
 	e := models.BlogDB.Model(&article.DB_BLOG_POST{}).Where("name = ?", name).Updates(d).Error
 	logger.BlogLogger.InfoF("开始更新文章 %s 错误: %v", name, e)

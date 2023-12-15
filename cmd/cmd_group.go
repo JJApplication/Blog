@@ -17,6 +17,7 @@ func AddAllCmds() []*cli.Command {
 	group = append(group, AddConfigCmds()...)
 	group = append(group, AddToolCmds()...)
 	group = append(group, AddServiceCmds()...)
+	group = append(group, AddMigrateCmds()...)
 
 	return group
 }

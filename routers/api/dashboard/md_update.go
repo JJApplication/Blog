@@ -24,6 +24,7 @@ type postData struct {
 	Date    string `json:"date"`
 	Tags    string `json:"tags"`
 	Pin     int    `json:"pin"`
+	Lock    int    `json:"lock"`
 }
 
 type postData2 struct {
@@ -113,6 +114,7 @@ func UpdatePost(c *gin.Context) {
 			d.Date,
 			d.Tags,
 			d.Pin,
+			d.Lock,
 		)
 		if e != nil {
 			c.JSON(http.StatusOK, gin.H{

@@ -14,6 +14,7 @@ type RES_POST struct {
 	Date     string `json:"date"`
 	Abstract string `json:"abstract"`
 	Tags     string `json:"tags"`
+	Lock     int    `json:"lock"`
 }
 
 // RES_POST_MORE 文章详情
@@ -25,6 +26,7 @@ type RES_POST_MORE struct {
 	Content    string `json:"content"`
 	Tags       string `json:"tags"`
 	Categories string `json:"categories"`
+	Lock       int    `json:"lock"`
 }
 
 // RES_POST_BROTHER 仅用于获取上下篇

@@ -10,6 +10,8 @@ package article
 import "blog/models"
 
 // DB_BLOG_POST 文章表
+//
+// update 2023.12 增加lock私密文章 仅管理员可以查看
 type DB_BLOG_POST struct {
 	models.Model
 	ID         int    `gorm:"not null" json:"id"`
@@ -23,4 +25,5 @@ type DB_BLOG_POST struct {
 	Tags       string `json:"tags"`
 	Categories string `json:"categories"`
 	Pin        int    `json:"pin"`
+	Lock       int    `json:"lock"`
 }

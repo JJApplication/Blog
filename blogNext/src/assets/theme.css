@@ -31,6 +31,7 @@
         --post-box: #e0e0e0;
         --post-title: #409eff;
         --post-title-hover: #2f343f;
+        --post-lock: #ff4141;
         --post-date: #909090;
         --tag-color: #909399;
         --tag-background: #f4f4f5;
@@ -94,6 +95,7 @@
         --post-box: #212121;
         --post-title: #409eff;
         --post-title-hover: #808080;
+        --post-lock: #ff4141;
         --post-date: #909090;
         --tag-color: #a0a0a1;
         --tag-background: #444546;
@@ -156,6 +158,7 @@
         --post-box: #e0e0e0;
         --post-title: #409eff;
         --post-title-hover: #2f343f;
+        --post-lock: #ff4141;
         --post-date: #909090;
         --tag-color: #909399;
         --tag-background: #f4f4f5;
