@@ -9,7 +9,7 @@
         <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option>
       </el-select>
     </div>
-    <p style="color: #afafaf; font-size: 12px; font-weight: bold">{{ date }}</p>
+    <p style="color: #afafaf; font-size: 12px; font-weight: bold;margin-bottom: 1.5rem">发布日期:&nbsp; {{ date }}</p>
     <div class="wrapper animated fadeIn">
       <div class="markdown-body gallery" v-html="post" id="markdown-body"></div>
       <div style="padding: 10px">
@@ -521,11 +521,11 @@ export default {
   padding: 30px 10px;
 }
 .title {
-  margin: 72px auto 4px;
+  margin: 4.5rem auto 0.25rem;
   width: fit-content;
-  padding: 4px 8px;
+  padding: 0.5rem;
   font-weight: bold;
-  font-size: 1.2rem;
+  font-size: 2.75rem;
 }
 #theme {
   position: fixed;

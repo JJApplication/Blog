@@ -1,7 +1,7 @@
 // 可自由定制的项目
 // 在打包的时候使用
 let prefix = 'https:' === document.location.protocol ? 'https' : 'http'
-let api_server = import.meta.env.DEV ? 'http://renj.io:5000' : ''
+let api_server = import.meta.env.DEV ? 'https://blog.renj.io' : ''
 const customData = {
   // 前端分离时使用
   api_url: api_server,
