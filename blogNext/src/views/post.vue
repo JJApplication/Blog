@@ -9,7 +9,7 @@
         <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value"></el-option>
       </el-select>
     </div>
-    <p style="color: #afafaf; font-size: 12px; font-weight: bold;margin-bottom: 1.5rem">发布日期:&nbsp; {{ date }}</p>
+    <p  class="title-date">发布日期:&nbsp; {{ date }}</p>
     <div class="wrapper animated fadeIn">
       <div class="markdown-body gallery" v-html="post" id="markdown-body"></div>
       <div style="padding: 10px">
@@ -525,8 +525,14 @@ export default {
   width: fit-content;
   padding: 0.5rem;
   font-weight: bold;
-  font-size: 2.75rem;
+  font-size: 2.25rem;
 }
+.title-date {
+  color: #afafaf;
+  font-size: 0.95rem;
+  margin-bottom: 1.5rem;
+}
+
 #theme {
   position: fixed;
   z-index: 999;
@@ -574,6 +580,12 @@ export default {
   #theme /deep/ .el-input__icon {
     line-height: 32px;
     width: 15px;
+  }
+  .title {
+    font-size: 1.75rem;
+  }
+  .title-date {
+    font-size: 0.85rem;
   }
 }
 .wrapper {
