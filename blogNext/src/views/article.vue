@@ -159,7 +159,7 @@
       </div>
     </div>
     <div v-if="!canDisplay" style="padding: 2rem">
-      <h1 style="margin: 1rem">阅读模式仅支持宽屏1440px及以上</h1>
+      <h1 style="margin: 1rem">阅读模式仅支持宽屏1080px及以上</h1>
       <el-button type="primary" @click="postMode">返回博客模式</el-button>
     </div>
     <el-backtop target=".right-row"></el-backtop>
@@ -289,10 +289,10 @@ export default {
     },
   },
   mounted() {
-    this.canDisplay = document.body.clientWidth >= 1440
+    this.canDisplay = document.body.clientWidth >= 1080
     window.onresize = () => {
       this.fitHeight = (document.body.clientHeight < document.getElementById("article-detail").clientHeight)
-      this.canDisplay = document.body.clientWidth >= 1440
+      this.canDisplay = document.body.clientWidth >= 1080
       if (this.canDisplay && !document.getElementById('wrapper')) {
         this.initPage()
       }

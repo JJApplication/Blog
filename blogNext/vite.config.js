@@ -13,22 +13,7 @@ export default defineConfig({
     extensions: ['.vue', '.js', '.jsx', '.ts', '.tsx'],
   },
   build: {
-    rollupOptions: {
-      output: {
-        manualChunks: (id) => {
-          if (id.includes('/node_modules/element-ui/lib/utils')) {
-            return 'element-ui-util'
-          } else if (id.includes('/node_modules/element-ui/lib/locale/')) {
-            return 'element-ui-locale'
-          } else if (id.includes('/node_modules/element-ui/lib/')) {
-            return 'element-ui'
-          }
-          if (id.includes('/node_modules/axios')) {
-            return 'axios'
-          }
-        },
-      },
-    },
+    rollupOptions: {},
     minify: true,
   },
 })
