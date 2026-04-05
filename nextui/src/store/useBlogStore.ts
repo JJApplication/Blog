@@ -36,14 +36,18 @@ export interface Message {
 
 interface BlogState {
   articles: Article[];
+  searchResults: Article[];
   tags: Tag[];
   zhuanlans: Zhuanlan[];
   archives: Archive[];
   messages: Message[];
   total: number;
+  pageSize: number;
   isLoading: boolean;
   error: string | null;
-  fetchArticles: (page?: number) => Promise<void>;
+  setPageSize: (size: number) => void;
+  fetchArticles: (page?: number, limit?: number) => Promise<void>;
+  searchArticles: (key: string) => Promise<void>;
   fetchTags: () => Promise<void>;
   fetchZhuanlans: () => Promise<void>;
   fetchArchives: () => Promise<void>;
@@ -53,18 +57,22 @@ interface BlogState {
 
 export const useBlogStore = create<BlogState>((set) => ({
   articles: [],
+  searchResults: [],
   tags: [],
   zhuanlans: [],
   archives: [],
   messages: [],
   total: 0,
+  pageSize: 10,
   isLoading: false,
   error: null,
-  fetchArticles: async (page = 1) => {
+  setPageSize: (size: number) => set({ pageSize: size }),
+  fetchArticles: async (page = 1, limit) => {
+    const currentLimit = limit || useBlogStore.getState().pageSize;
     set({ isLoading: true, error: null });
     try {
       // Proxy route configured in next.config.js will handle this request
-      const res = await fetch(`/api/article/posts?p=${page}`);
+      const res = await fetch(`/api/article/posts?p=${page}&limit=${currentLimit}`);
       if (!res.ok) {
         throw new Error('Failed to fetch articles');
       }
@@ -75,6 +83,25 @@ export const useBlogStore = create<BlogState>((set) => ({
       } else {
         throw new Error(json.msg || 'Error fetching data');
       }
+    } catch (error) {
+      if (error instanceof Error) {
+        set({ error: error.message, isLoading: false });
+      } else {
+        set({ error: 'An unknown error occurred', isLoading: false });
+      }
+    }
+  },
+  searchArticles: async (key: string) => {
+    if (!key.trim()) {
+      set({ searchResults: [] });
+      return;
+    }
+    set({ isLoading: true, error: null });
+    try {
+      const res = await fetch(`/api/article/search?key=${encodeURIComponent(key)}`);
+      if (!res.ok) throw new Error('Failed to search articles');
+      const json = await res.json();
+      set({ searchResults: Array.isArray(json) ? json : [], isLoading: false });
     } catch (error) {
       if (error instanceof Error) {
         set({ error: error.message, isLoading: false });

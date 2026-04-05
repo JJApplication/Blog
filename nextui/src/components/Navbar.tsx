@@ -73,6 +73,9 @@ export function Navbar() {
                   className="absolute top-full right-0 mt-2 w-40 glass-effect rounded-xl overflow-hidden shadow-xl"
                 >
                   <div className="flex flex-col py-2">
+                    <Link href="/search" className="px-4 py-2 text-white/70 hover:text-white hover:bg-white/10 transition-colors">
+                      Search
+                    </Link>
                     <Link href="/archive" className="px-4 py-2 text-white/70 hover:text-white hover:bg-white/10 transition-colors">
                       Archives
                     </Link>
