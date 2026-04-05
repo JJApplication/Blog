@@ -1,12 +1,13 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useEffect } from "react";
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Hexagon } from "lucide-react";
+import { Hexagon, ChevronDown, User } from "lucide-react";
 
 export function Navbar() {
   const { scrollY } = useScroll();
+  const [isExploreOpen, setIsExploreOpen] = useState(false);
 
   const background = useTransform(
     scrollY,
@@ -49,10 +50,53 @@ export function Navbar() {
           <Hexagon className="w-8 h-8 text-white group-hover:text-glow transition-all" />
           <span className="font-bold text-xl tracking-wider group-hover:text-glow transition-all">BLOG.NEXT</span>
         </Link>
-        <div className="flex gap-6 items-center text-sm font-medium">
+        <div className="flex gap-6 items-center text-sm font-medium relative">
           <Link href="/" className="text-white/70 hover:text-white transition-colors">Home</Link>
-          <Link href="/archive" className="text-white/70 hover:text-white transition-colors">Archive</Link>
+          
+          <div 
+            className="relative"
+            onMouseEnter={() => setIsExploreOpen(true)}
+            onMouseLeave={() => setIsExploreOpen(false)}
+          >
+            <button className="flex items-center gap-1 text-white/70 hover:text-white transition-colors py-2">
+              Explore
+              <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${isExploreOpen ? 'rotate-180' : ''}`} />
+            </button>
+            
+            <AnimatePresence>
+              {isExploreOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                  transition={{ duration: 0.2 }}
+                  className="absolute top-full right-0 mt-2 w-40 glass-effect rounded-xl overflow-hidden shadow-xl"
+                >
+                  <div className="flex flex-col py-2">
+                    <Link href="/archive" className="px-4 py-2 text-white/70 hover:text-white hover:bg-white/10 transition-colors">
+                      Archives
+                    </Link>
+                    <Link href="/tags" className="px-4 py-2 text-white/70 hover:text-white hover:bg-white/10 transition-colors">
+                      Tags
+                    </Link>
+                    <Link href="/zhuanlan" className="px-4 py-2 text-white/70 hover:text-white hover:bg-white/10 transition-colors">
+                      Zhuanlan
+                    </Link>
+                    <Link href="/message" className="px-4 py-2 text-white/70 hover:text-white hover:bg-white/10 transition-colors">
+                      Message
+                    </Link>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+
           <Link href="/about" className="text-white/70 hover:text-white transition-colors">About</Link>
+          
+          <Link href="/signin" className="flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/10 transition-all text-white/90 hover:text-white hover:shadow-[0_0_15px_rgba(255,255,255,0.15)]">
+            <User className="w-4 h-4" />
+            <span>Sign In</span>
+          </Link>
         </div>
       </div>
     </motion.nav>

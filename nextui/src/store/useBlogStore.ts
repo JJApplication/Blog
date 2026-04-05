@@ -10,16 +10,53 @@ export interface Article {
   lock: number;
 }
 
+export interface Tag {
+  tag: string;
+}
+
+export interface Zhuanlan {
+  link: string;
+  title: string;
+  date: string;
+  posts: string[];
+  content: string;
+}
+
+export interface Archive {
+  date: string;
+  count: number;
+}
+
+export interface Message {
+  primary_id: number;
+  user: string;
+  date: string;
+  message: string;
+}
+
 interface BlogState {
   articles: Article[];
+  tags: Tag[];
+  zhuanlans: Zhuanlan[];
+  archives: Archive[];
+  messages: Message[];
   total: number;
   isLoading: boolean;
   error: string | null;
   fetchArticles: (page?: number) => Promise<void>;
+  fetchTags: () => Promise<void>;
+  fetchZhuanlans: () => Promise<void>;
+  fetchArchives: () => Promise<void>;
+  fetchMessages: () => Promise<void>;
+  postMessage: (message: string) => Promise<boolean>;
 }
 
 export const useBlogStore = create<BlogState>((set) => ({
   articles: [],
+  tags: [],
+  zhuanlans: [],
+  archives: [],
+  messages: [],
   total: 0,
   isLoading: false,
   error: null,
@@ -44,6 +81,91 @@ export const useBlogStore = create<BlogState>((set) => ({
       } else {
         set({ error: 'An unknown error occurred', isLoading: false });
       }
+    }
+  },
+  fetchTags: async () => {
+    set({ isLoading: true, error: null });
+    try {
+      const res = await fetch(`/api/article/tags`);
+      if (!res.ok) throw new Error('Failed to fetch tags');
+      const json = await res.json();
+      if (json.code === 233200) {
+        set({ tags: json.data || [], isLoading: false });
+      } else {
+        throw new Error(json.msg || 'Error fetching tags');
+      }
+    } catch (error) {
+      if (error instanceof Error) {
+        set({ error: error.message, isLoading: false });
+      } else {
+        set({ error: 'An unknown error occurred', isLoading: false });
+      }
+    }
+  },
+  fetchZhuanlans: async () => {
+    set({ isLoading: true, error: null });
+    try {
+      const res = await fetch(`/api/zhuanlan`);
+      if (!res.ok) throw new Error('Failed to fetch zhuanlan');
+      const json = await res.json();
+      // The API doesn't seem to return a code for zhuanlan, just data and msg
+      set({ zhuanlans: json.data || [], isLoading: false });
+    } catch (error) {
+      if (error instanceof Error) {
+        set({ error: error.message, isLoading: false });
+      } else {
+        set({ error: 'An unknown error occurred', isLoading: false });
+      }
+    }
+  },
+  fetchArchives: async () => {
+    set({ isLoading: true, error: null });
+    try {
+      const res = await fetch(`/api/article/archive`);
+      if (!res.ok) throw new Error('Failed to fetch archives');
+      const json = await res.json();
+      set({ archives: json.data || [], isLoading: false });
+    } catch (error) {
+      if (error instanceof Error) {
+        set({ error: error.message, isLoading: false });
+      } else {
+        set({ error: 'An unknown error occurred', isLoading: false });
+      }
+    }
+  },
+  fetchMessages: async () => {
+    set({ isLoading: true, error: null });
+    try {
+      const res = await fetch(`/api/message`);
+      if (!res.ok) throw new Error('Failed to fetch messages');
+      const json = await res.json();
+      set({ messages: Array.isArray(json) ? json : [], isLoading: false });
+    } catch (error) {
+      if (error instanceof Error) {
+        set({ error: error.message, isLoading: false });
+      } else {
+        set({ error: 'An unknown error occurred', isLoading: false });
+      }
+    }
+  },
+  postMessage: async (message: string) => {
+    try {
+      const res = await fetch(`/api/message`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ message }),
+      });
+      if (!res.ok) throw new Error('Failed to post message');
+      // Re-fetch messages after successful post
+      useBlogStore.getState().fetchMessages();
+      return true;
+    } catch (error) {
+      if (error instanceof Error) {
+        set({ error: error.message });
+      }
+      return false;
     }
   },
 }));

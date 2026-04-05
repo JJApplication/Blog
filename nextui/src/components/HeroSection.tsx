@@ -3,10 +3,12 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 import { GlassButton } from "./GlassButton";
-import { ArrowDown } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 export function HeroSection() {
   const { scrollY } = useScroll();
+  const router = useRouter();
   
   // Parallax and fade out effects for the background image
   const backgroundY = useTransform(scrollY, [0, 500], ["0%", "50%"]);
@@ -62,13 +64,10 @@ export function HeroSection() {
           className="mt-12"
         >
           <GlassButton onClick={() => {
-            window.scrollTo({
-              top: window.innerHeight,
-              behavior: 'smooth'
-            });
+            router.push('/posts');
           }}>
             Explore Articles
-            <ArrowDown className="w-4 h-4 ml-2 animate-bounce" />
+            <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
           </GlassButton>
         </motion.div>
       </div>

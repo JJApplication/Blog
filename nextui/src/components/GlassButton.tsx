@@ -13,7 +13,7 @@ export function GlassButton({ children, className, ...props }: GlassButtonProps)
         "px-6 py-2.5 rounded-full text-sm font-medium tracking-wide transition-all duration-300",
         "bg-white/5 border border-white/10 text-white backdrop-blur-md",
         "hover:bg-white/10 hover:border-white/20 hover:shadow-[0_0_20px_rgba(255,255,255,0.2)]",
-        "active:scale-95",
+        "active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed disabled:active:scale-100 disabled:hover:bg-white/5 disabled:hover:border-white/10 disabled:hover:shadow-none",
         className
       )}
       {...props}
