@@ -41,6 +41,10 @@ interface BlogState {
   zhuanlans: Zhuanlan[];
   archives: Archive[];
   messages: Message[];
+  stats: {
+    views: number | null;
+    routines: number | null;
+  };
   total: number;
   pageSize: number;
   isLoading: boolean;
@@ -53,6 +57,7 @@ interface BlogState {
   fetchArchives: () => Promise<void>;
   fetchMessages: () => Promise<void>;
   postMessage: (message: string) => Promise<boolean>;
+  fetchStats: () => Promise<void>;
 }
 
 export const useBlogStore = create<BlogState>((set) => ({
@@ -62,6 +67,7 @@ export const useBlogStore = create<BlogState>((set) => ({
   zhuanlans: [],
   archives: [],
   messages: [],
+  stats: { views: null, routines: null },
   total: 0,
   pageSize: 10,
   isLoading: false,
@@ -195,4 +201,28 @@ export const useBlogStore = create<BlogState>((set) => ({
       return false;
     }
   },
+  fetchStats: async () => {
+    try {
+      const [viewsRes, routinesRes] = await Promise.all([
+        fetch('/api/statistic/views'),
+        fetch('/api/statistic/routines')
+      ]);
+      
+      let views = null;
+      let routines = null;
+
+      if (viewsRes.ok) {
+        const text = await viewsRes.text();
+        views = parseInt(text, 10);
+      }
+      if (routinesRes.ok) {
+        const text = await routinesRes.text();
+        routines = parseInt(text, 10);
+      }
+
+      set({ stats: { views, routines } });
+    } catch (error) {
+      console.error("Failed to fetch stats", error);
+    }
+  }
 }));
