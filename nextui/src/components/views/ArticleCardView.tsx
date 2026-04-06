@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { GlassCard } from "@/components/GlassCard";
 import { Calendar, Tag } from "lucide-react";
 import { Article } from "@/store/useBlogStore";
+import Link from "next/link";
 
 interface ArticleCardViewProps {
   articles: Article[];
@@ -52,7 +53,8 @@ export function ArticleCardView({ articles, isLoading, error }: ArticleCardViewP
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: index * 0.05 }}
         >
-          <GlassCard className="h-full flex flex-col hover:-translate-y-2 cursor-pointer">
+          <Link href={`/post?name=${encodeURIComponent(article.name)}`} className="block h-full">
+            <GlassCard className="h-full flex flex-col hover:-translate-y-2 cursor-pointer">
             <div className="flex flex-col h-full">
               <h3 className="text-xl font-semibold text-white mb-3 line-clamp-2 leading-snug">
                 {article.title}
@@ -76,7 +78,8 @@ export function ArticleCardView({ articles, isLoading, error }: ArticleCardViewP
                 )}
               </div>
             </div>
-          </GlassCard>
+            </GlassCard>
+          </Link>
         </motion.div>
       ))}
     </div>

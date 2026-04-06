@@ -11,7 +11,10 @@
   "dependencies": {
     "clsx": "^2.1.1",
     "framer-motion": "^12.38.0",
+    "highlight.js": "^11.11.1",
+    "isomorphic-dompurify": "^3.7.1",
     "lucide-react": "^1.7.0",
+    "marked": "^17.0.6",
     "next": "14.2.35",
     "react": "^18",
     "react-dom": "^18",

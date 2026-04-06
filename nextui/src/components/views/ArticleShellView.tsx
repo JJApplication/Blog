@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { GlassCard } from "@/components/GlassCard";
 import { Article } from "@/store/useBlogStore";
+import Link from "next/link";
 
 interface ArticleShellViewProps {
   articles: Article[];
@@ -39,7 +40,9 @@ export function ArticleShellView({ articles, isLoading, error }: ArticleShellVie
           {articles.map((a) => (
             <div key={a.id} className="flex gap-4">
               <span className="text-white/50 w-24 shrink-0">{a.date.split(" ")[0]}</span>
-              <span className="truncate">{a.name}</span>
+              <Link href={`/post?name=${encodeURIComponent(a.name)}`} className="truncate hover:text-cyan-300">
+                {a.name}
+              </Link>
             </div>
           ))}
         </div>
@@ -51,7 +54,9 @@ export function ArticleShellView({ articles, isLoading, error }: ArticleShellVie
             <div key={a.id} className="flex flex-col border-b border-white/10 pb-2">
               <div className="flex gap-4 text-green-400">
                 <span className="text-white/50 w-24 shrink-0">{a.date.split(" ")[0]}</span>
-                <span className="font-bold">{a.name}</span>
+                <Link href={`/post?name=${encodeURIComponent(a.name)}`} className="font-bold hover:text-cyan-300">
+                  {a.name}
+                </Link>
               </div>
               <div className="text-white/80 mt-1">{a.title}</div>
               <div className="text-white/40 mt-1 line-clamp-2">{a.abstract}</div>
