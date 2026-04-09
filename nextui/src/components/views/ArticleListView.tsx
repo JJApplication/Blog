@@ -51,7 +51,7 @@ export function ArticleListView({ articles, isLoading, error }: ArticleListViewP
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.4, delay: index * 0.05 }}
         >
-          <Link href={`/post?name=${encodeURIComponent(article.name)}`} className="block">
+          <Link href={`/post/${encodeURIComponent(article.name)}`} className="block">
             <GlassCard className="!p-4 flex items-center justify-between hover:bg-white/10 cursor-pointer group">
             <div className="flex flex-col gap-1">
               <h3 className="text-lg font-semibold text-white group-hover:text-blue-300 transition-colors">

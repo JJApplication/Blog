@@ -73,7 +73,7 @@ export function MarkdownRenderer({ content, className }: MarkdownRendererProps) 
           alt: img.getAttribute("alt") || "",
         };
       })
-      .filter((item): item is { src: string; alt?: string } => Boolean(item));
+      .filter((item): item is { src: string; alt: string } => Boolean(item));
 
     setSlides(nextSlides);
     return;

@@ -40,7 +40,7 @@ export function ArticleShellView({ articles, isLoading, error }: ArticleShellVie
           {articles.map((a) => (
             <div key={a.id} className="flex gap-4">
               <span className="text-white/50 w-24 shrink-0">{a.date.split(" ")[0]}</span>
-              <Link href={`/post?name=${encodeURIComponent(a.name)}`} className="truncate hover:text-cyan-300">
+              <Link href={`/post/${encodeURIComponent(a.name)}`} className="truncate hover:text-cyan-300">
                 {a.name}
               </Link>
             </div>
@@ -54,7 +54,7 @@ export function ArticleShellView({ articles, isLoading, error }: ArticleShellVie
             <div key={a.id} className="flex flex-col border-b border-white/10 pb-2">
               <div className="flex gap-4 text-green-400">
                 <span className="text-white/50 w-24 shrink-0">{a.date.split(" ")[0]}</span>
-                <Link href={`/post?name=${encodeURIComponent(a.name)}`} className="font-bold hover:text-cyan-300">
+                <Link href={`/post/${encodeURIComponent(a.name)}`} className="font-bold hover:text-cyan-300">
                   {a.name}
                 </Link>
               </div>
