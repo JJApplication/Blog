@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { apiFetch } from '@/lib/api';
 
 export interface Article {
   id: number;
@@ -78,7 +79,7 @@ export const useBlogStore = create<BlogState>((set) => ({
     set({ isLoading: true, error: null });
     try {
       // Proxy route configured in next.config.js will handle this request
-      const res = await fetch(`/api/article/posts?p=${page}&limit=${currentLimit}`);
+      const res = await apiFetch(`/api/article/posts?p=${page}&limit=${currentLimit}`);
       if (!res.ok) {
         throw new Error('Failed to fetch articles');
       }
@@ -104,7 +105,7 @@ export const useBlogStore = create<BlogState>((set) => ({
     }
     set({ isLoading: true, error: null });
     try {
-      const res = await fetch(`/api/article/search?key=${encodeURIComponent(key)}`);
+      const res = await apiFetch(`/api/article/search?key=${encodeURIComponent(key)}`);
       if (!res.ok) throw new Error('Failed to search articles');
       const json = await res.json();
       set({ searchResults: Array.isArray(json) ? json : [], isLoading: false });
@@ -119,7 +120,7 @@ export const useBlogStore = create<BlogState>((set) => ({
   fetchTags: async () => {
     set({ isLoading: true, error: null });
     try {
-      const res = await fetch(`/api/article/tags`);
+      const res = await apiFetch(`/api/article/tags`);
       if (!res.ok) throw new Error('Failed to fetch tags');
       const json = await res.json();
       if (json.code === 233200) {
@@ -138,7 +139,7 @@ export const useBlogStore = create<BlogState>((set) => ({
   fetchZhuanlans: async () => {
     set({ isLoading: true, error: null });
     try {
-      const res = await fetch(`/api/zhuanlan`);
+      const res = await apiFetch(`/api/zhuanlan`);
       if (!res.ok) throw new Error('Failed to fetch zhuanlan');
       const json = await res.json();
       // The API doesn't seem to return a code for zhuanlan, just data and msg
@@ -154,7 +155,7 @@ export const useBlogStore = create<BlogState>((set) => ({
   fetchArchives: async () => {
     set({ isLoading: true, error: null });
     try {
-      const res = await fetch(`/api/article/archive`);
+      const res = await apiFetch(`/api/article/archive`);
       if (!res.ok) throw new Error('Failed to fetch archives');
       const json = await res.json();
       set({ archives: json.data || [], isLoading: false });
@@ -169,7 +170,7 @@ export const useBlogStore = create<BlogState>((set) => ({
   fetchMessages: async () => {
     set({ isLoading: true, error: null });
     try {
-      const res = await fetch(`/api/message`);
+      const res = await apiFetch(`/api/message`);
       if (!res.ok) throw new Error('Failed to fetch messages');
       const json = await res.json();
       set({ messages: Array.isArray(json) ? json : [], isLoading: false });
@@ -183,7 +184,7 @@ export const useBlogStore = create<BlogState>((set) => ({
   },
   postMessage: async (message: string) => {
     try {
-      const res = await fetch(`/api/message`, {
+      const res = await apiFetch(`/api/message`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -204,8 +205,8 @@ export const useBlogStore = create<BlogState>((set) => ({
   fetchStats: async () => {
     try {
       const [viewsRes, routinesRes] = await Promise.all([
-        fetch('/api/statistic/views'),
-        fetch('/api/statistic/routines')
+        apiFetch('/api/statistic/views'),
+        apiFetch('/api/statistic/routines')
       ]);
       
       let views = null;
