@@ -1,0 +1,127 @@
+@import "yet-another-react-lightbox/styles.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Pure dark mode context */
+    --background: #000000;
+    --foreground: #f8fafc;
+    --glass: rgba(0, 0, 0, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.1);
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    /* Enable dark mode explicitly */
+    color-scheme: dark;
+  }
+}
+
+@layer utilities {
+  .glass-effect {
+    @apply bg-glass backdrop-blur-md border border-glass-border shadow-[0_4px_30px_rgba(0,0,0,0.1)];
+  }
+  
+  .glass-card {
+    @apply glass-effect rounded-2xl p-6 transition-all duration-300;
+  }
+
+  .glass-card:hover {
+    @apply bg-white/5 border-white/20 shadow-[0_8px_40px_rgba(255,255,255,0.1)];
+  }
+
+  .text-glow {
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.5), 0 0 40px rgba(255, 255, 255, 0.2);
+  }
+
+  .markdown-content {
+    @apply text-white/85 leading-7 text-base break-words;
+  }
+
+  .markdown-content > * + * {
+    @apply mt-4;
+  }
+
+  .markdown-content h1,
+  .markdown-content h2,
+  .markdown-content h3,
+  .markdown-content h4 {
+    @apply text-white font-semibold tracking-tight mt-8 mb-3;
+  }
+
+  .markdown-content h1 {
+    @apply text-3xl;
+  }
+
+  .markdown-content h2 {
+    @apply text-2xl;
+  }
+
+  .markdown-content h3 {
+    @apply text-xl;
+  }
+
+  .markdown-content p,
+  .markdown-content ul,
+  .markdown-content ol,
+  .markdown-content blockquote {
+    @apply text-white/80;
+  }
+
+  .markdown-content ul {
+    @apply list-disc pl-6;
+  }
+
+  .markdown-content ol {
+    @apply list-decimal pl-6;
+  }
+
+  .markdown-content li + li {
+    @apply mt-1;
+  }
+
+  .markdown-content blockquote {
+    @apply border-l-4 border-cyan-400/40 pl-4 italic bg-white/[0.03] rounded-r-md py-2;
+  }
+
+  .markdown-content a {
+    @apply text-cyan-300 underline underline-offset-4 hover:text-cyan-200 transition-colors;
+  }
+
+  .markdown-content code {
+    @apply text-cyan-200 bg-white/[0.06] rounded px-1.5 py-0.5 text-sm;
+  }
+
+  .markdown-content pre {
+    @apply rounded-xl border border-white/10 bg-black/70 p-4 overflow-x-auto;
+  }
+
+  .markdown-content pre code {
+    @apply bg-transparent p-0 text-sm;
+  }
+
+  .markdown-content hr {
+    @apply border-white/10 my-6;
+  }
+
+  .markdown-content table {
+    @apply w-full border-collapse border border-white/15 rounded-lg overflow-hidden;
+  }
+
+  .markdown-content th,
+  .markdown-content td {
+    @apply border border-white/10 px-3 py-2 text-left;
+  }
+
+  .markdown-content img {
+    @apply rounded-xl border border-white/10 cursor-zoom-in;
+  }
+
+  .markdown-comment {
+    @apply text-[0.95rem] leading-7;
+  }
+}

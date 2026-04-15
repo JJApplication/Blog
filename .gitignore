@@ -103,7 +103,6 @@ dist
 .tern-port
 .DS_Store
 # binary
-app
 blog
 app_blog
 *.db
