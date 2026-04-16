@@ -70,9 +70,13 @@ export function PostDetailClient({ postName }: PostDetailClientProps) {
         const commentsJson = commentsRes.ok
           ? ((await commentsRes.json()) as PostCommentsResponse)
           : { data: [], msg: "" };
-        const brotherJson = brotherRes.ok ? ((await brotherRes.json()) as string[]) : [];
+        let brotherJson = [] as string[]; 
+        if (brotherRes.ok) {
+          const {data} = await brotherRes.json();
+          brotherJson = data as string[];
+        }
 
-        if (postJson.code !== 233200 || !postJson.data) {
+        if (postJson.code !== 200 || !postJson.data) {
           throw new Error(postJson.msg || "Failed to parse post data");
         }
 

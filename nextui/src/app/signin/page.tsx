@@ -7,41 +7,47 @@ import { motion } from "framer-motion";
 import { User, Lock, LogIn } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { apiFetch } from "@/lib/api";
+import { useBlogStore } from "@/store/useBlogStore";
 
 export default function SignInPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [warningMessage, setWarningMessage] = useState("");
   const router = useRouter();
+  const checkAuth = useBlogStore((state) => state.checkAuth);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
+    setWarningMessage("");
     
     try {
       const res = await apiFetch("/api/admin/login", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
         body: JSON.stringify({ name: username, passwd: password }),
       });
 
       const data = await res.json();
       
-      if (data.code === 233200) {
+      if (data.code === 200) {
         // Read token from response header or data
-        const token = res.headers.get("admin_token") || data.data;
+        const token = data.data.token;
         if (token) {
           localStorage.setItem("admin_token", token);
         }
-        router.push("/");
+        const isAuthenticated = await checkAuth();
+        if (isAuthenticated) {
+          router.push("/dashboard");
+        } else {
+          setWarningMessage("Token authentication failed");
+        }
       } else {
-        alert(data.msg || "Login failed");
+        setWarningMessage(data.msg || "Login failed");
       }
     } catch (error) {
       console.error("Login error:", error);
-      alert("Network error or server unavailable");
+      setWarningMessage("Network error or server unavailable");
     } finally {
       setIsLoading(false);
     }
@@ -101,6 +107,11 @@ export default function SignInPage() {
             </div>
 
             <div className="pt-4">
+              {warningMessage && (
+                <div className="mb-4 rounded-lg border border-amber-400/30 bg-amber-400/10 px-4 py-2 text-sm text-amber-200">
+                  {warningMessage}
+                </div>
+              )}
               <GlassButton 
                 type="submit" 
                 className="w-full py-3 flex items-center justify-center text-base"

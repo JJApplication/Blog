@@ -5,11 +5,13 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Hexagon, ChevronDown, User } from "lucide-react";
 import { StatModal } from "./StatModal";
+import { useBlogStore } from "@/store/useBlogStore";
 
 export function Navbar() {
     const { scrollY } = useScroll();
     const [isExploreOpen, setIsExploreOpen] = useState(false);
     const [isStatOpen, setIsStatOpen] = useState(false);
+    const { isAuthenticated, checkAuth } = useBlogStore();
 
     const background = useTransform(
         scrollY,
@@ -37,6 +39,10 @@ export function Navbar() {
             }
         });
     }, [scrollY]);
+
+    useEffect(() => {
+        checkAuth();
+    }, [checkAuth]);
 
     return (
         <>
@@ -108,9 +114,9 @@ export function Navbar() {
 
                         <Link href="/about" className="text-white/70 hover:text-white transition-colors">About</Link>
 
-                        <Link href="/signin" className="flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/10 transition-all text-white/90 hover:text-white hover:shadow-[0_0_15px_rgba(255,255,255,0.15)]">
+                        <Link href={isAuthenticated ? "/dashboard" : "/signin"} className="flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/10 transition-all text-white/90 hover:text-white hover:shadow-[0_0_15px_rgba(255,255,255,0.15)]">
                             <User className="w-4 h-4" />
-                            <span>Sign In</span>
+                            <span>{isAuthenticated ? "Manage" : "Sign In"}</span>
                         </Link>
                     </div>
                 </div>

@@ -79,7 +79,7 @@ export function StatModal({ isOpen, onClose }: StatModalProps) {
                   <div className="flex items-center justify-between p-4 rounded-xl bg-white/5 border border-white/5">
                     <div className="flex items-center gap-3">
                       <Server className="w-5 h-5 text-purple-400" />
-                      <span className="text-white/70 font-medium">Goroutines</span>
+                      <span className="text-white/70 font-medium">Threads</span>
                     </div>
                     <span className="text-xl font-bold text-white">
                       {stats.routines !== null ? stats.routines : "..."}

@@ -11,10 +11,6 @@ export interface Article {
   lock: number;
 }
 
-export interface Tag {
-  tag: string;
-}
-
 export interface Zhuanlan {
   link: string;
   title: string;
@@ -38,7 +34,8 @@ export interface Message {
 interface BlogState {
   articles: Article[];
   searchResults: Article[];
-  tags: Tag[];
+  tags: string[];
+  isAuthenticated: boolean;
   zhuanlans: Zhuanlan[];
   archives: Archive[];
   messages: Message[];
@@ -59,12 +56,14 @@ interface BlogState {
   fetchMessages: () => Promise<void>;
   postMessage: (message: string) => Promise<boolean>;
   fetchStats: () => Promise<void>;
+  checkAuth: () => Promise<boolean>;
 }
 
 export const useBlogStore = create<BlogState>((set) => ({
   articles: [],
   searchResults: [],
   tags: [],
+  isAuthenticated: false,
   zhuanlans: [],
   archives: [],
   messages: [],
@@ -79,13 +78,13 @@ export const useBlogStore = create<BlogState>((set) => ({
     set({ isLoading: true, error: null });
     try {
       // Proxy route configured in next.config.js will handle this request
-      const res = await apiFetch(`/api/article/posts?p=${page}&limit=${currentLimit}`);
+      const res = await apiFetch(`/api/article/posts?page=${page}&pageSize=${currentLimit}`);
       if (!res.ok) {
         throw new Error('Failed to fetch articles');
       }
       const json = await res.json();
       
-      if (json.code === 233200) {
+      if (json.code === 200) {
         set({ articles: json.data || [], total: json.len || 0, isLoading: false });
       } else {
         throw new Error(json.msg || 'Error fetching data');
@@ -108,7 +107,7 @@ export const useBlogStore = create<BlogState>((set) => ({
       const res = await apiFetch(`/api/article/search?key=${encodeURIComponent(key)}`);
       if (!res.ok) throw new Error('Failed to search articles');
       const json = await res.json();
-      set({ searchResults: Array.isArray(json) ? json : [], isLoading: false });
+      set({ searchResults: Array.isArray(json.data) ? json.data : [], isLoading: false });
     } catch (error) {
       if (error instanceof Error) {
         set({ error: error.message, isLoading: false });
@@ -123,8 +122,11 @@ export const useBlogStore = create<BlogState>((set) => ({
       const res = await apiFetch(`/api/article/tags`);
       if (!res.ok) throw new Error('Failed to fetch tags');
       const json = await res.json();
-      if (json.code === 233200) {
-        set({ tags: json.data || [], isLoading: false });
+      if (json.code === 200) {
+        const tags = Array.isArray(json.data)
+          ? json.data
+          : [];
+        set({ tags, isLoading: false });
       } else {
         throw new Error(json.msg || 'Error fetching tags');
       }
@@ -173,7 +175,7 @@ export const useBlogStore = create<BlogState>((set) => ({
       const res = await apiFetch(`/api/message`);
       if (!res.ok) throw new Error('Failed to fetch messages');
       const json = await res.json();
-      set({ messages: Array.isArray(json) ? json : [], isLoading: false });
+      set({ messages: Array.isArray(json.data) ? json.data : [], isLoading: false });
     } catch (error) {
       if (error instanceof Error) {
         set({ error: error.message, isLoading: false });
@@ -224,6 +226,24 @@ export const useBlogStore = create<BlogState>((set) => ({
       set({ stats: { views, routines } });
     } catch (error) {
       console.error("Failed to fetch stats", error);
+    }
+  },
+  checkAuth: async () => {
+    try {
+      const res = await apiFetch('/api/auth');
+      if (!res.ok) {
+        set({ isAuthenticated: false });
+        return false;
+      }
+
+      const json = await res.json();
+      const isAuthenticated = json.code === 200 && json.data === 1;
+      set({ isAuthenticated });
+
+      return isAuthenticated;
+    } catch (error) {
+      set({ isAuthenticated: false });
+      return false;
     }
   }
 }));

@@ -39,7 +39,7 @@ export default function TagsPage() {
           <div className="flex flex-wrap gap-4">
             {tags.map((item, index) => (
               <motion.div
-                key={item.tag}
+                key={item}
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.3, delay: index * 0.02 }}
@@ -47,7 +47,7 @@ export default function TagsPage() {
                 <GlassCard className="!p-3 flex items-center gap-2 hover:-translate-y-1 cursor-pointer transition-transform duration-300">
                   <TagIcon className="w-4 h-4 text-blue-400" />
                   <span className="text-white/90 font-medium text-sm">
-                    {item.tag}
+                    {item}
                   </span>
                 </GlassCard>
               </motion.div>
