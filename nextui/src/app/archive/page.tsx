@@ -5,6 +5,7 @@ import { useBlogStore } from "@/store/useBlogStore";
 import { GlassCard } from "@/components/GlassCard";
 import { motion } from "framer-motion";
 import { Archive as ArchiveIcon } from "lucide-react";
+import Link from "next/link";
 
 export default function ArchivePage() {
   const { archives, fetchArchives, isLoading, error } = useBlogStore();
@@ -47,15 +48,17 @@ export default function ArchivePage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3, delay: index * 0.02 }}
               >
-                <GlassCard className="!p-4 h-full flex flex-col justify-center items-center hover:-translate-y-1 cursor-pointer transition-transform duration-300">
-                  <ArchiveIcon className="w-5 h-5 text-gray-400 mb-2 opacity-50" />
-                  <h3 className="text-lg font-medium text-white/90">
-                    {item.date}
-                  </h3>
-                  <span className="text-sm text-white/50 mt-1">
-                    {item.count} {item.count === 1 ? 'post' : 'posts'}
-                  </span>
-                </GlassCard>
+                <Link href={`/archive/${encodeURIComponent(item.date)}`} className="block h-full">
+                  <GlassCard className="!p-4 h-full flex flex-col justify-center items-center hover:-translate-y-1 cursor-pointer transition-transform duration-300">
+                    <ArchiveIcon className="w-5 h-5 text-gray-400 mb-2 opacity-50" />
+                    <h3 className="text-lg font-medium text-white/90">
+                      {item.date}
+                    </h3>
+                    <span className="text-sm text-white/50 mt-1">
+                      {item.count} {item.count === 1 ? 'post' : 'posts'}
+                    </span>
+                  </GlassCard>
+                </Link>
               </motion.div>
             ))}
           </div>

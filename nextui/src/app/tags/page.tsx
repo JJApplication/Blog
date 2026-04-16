@@ -5,6 +5,7 @@ import { useBlogStore } from "@/store/useBlogStore";
 import { GlassCard } from "@/components/GlassCard";
 import { motion } from "framer-motion";
 import { Tag as TagIcon } from "lucide-react";
+import Link from "next/link";
 
 export default function TagsPage() {
   const { tags, fetchTags, isLoading, error } = useBlogStore();
@@ -44,12 +45,14 @@ export default function TagsPage() {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.3, delay: index * 0.02 }}
               >
-                <GlassCard className="!p-3 flex items-center gap-2 hover:-translate-y-1 cursor-pointer transition-transform duration-300">
-                  <TagIcon className="w-4 h-4 text-blue-400" />
-                  <span className="text-white/90 font-medium text-sm">
-                    {item}
-                  </span>
-                </GlassCard>
+                <Link href={`/tag/${encodeURIComponent(item)}`}>
+                  <GlassCard className="!p-3 flex items-center gap-2 hover:-translate-y-1 cursor-pointer transition-transform duration-300">
+                    <TagIcon className="w-4 h-4 text-blue-400" />
+                    <span className="text-white/90 font-medium text-sm">
+                      {item}
+                    </span>
+                  </GlassCard>
+                </Link>
               </motion.div>
             ))}
           </div>
