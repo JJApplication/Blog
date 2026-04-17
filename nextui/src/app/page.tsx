@@ -10,9 +10,10 @@ import { Calendar, Tag } from "lucide-react";
 export default function Home() {
   const { articles, fetchArticles, isLoading, error, pageSize } = useBlogStore();
 
+  const latestPageSize = 6;
   useEffect(() => {
-    fetchArticles(1, pageSize);
-  }, [fetchArticles, pageSize]);
+    fetchArticles(1, latestPageSize);
+  }, [fetchArticles, latestPageSize]);
 
   return (
     <div className="min-h-screen bg-background flex flex-col items-center overflow-x-hidden">
