@@ -129,10 +129,6 @@ export default function ExportArticleTab() {
         </GlassButton>
       </div>
 
-      <p className="text-xs text-cyan-300/90 mb-3">
-        接口：{process.env.NODE_ENV === "development" ? "http://localhost:5000/api/dashboard/post/export" : "/api/dashboard/post/export"}
-      </p>
-
       {error && (
         <div className="rounded-lg border border-red-400/25 bg-red-500/10 px-4 py-2 text-sm text-red-200">
           {error}

@@ -57,7 +57,7 @@ export default function MessageDataTab({ title, endpoint, active, emptyText }: M
     setError(null);
     try {
       const isDebugMode = process.env.NODE_ENV === "development";
-      const requestUrl = isDebugMode ? `http://localhost:5000${endpoint}` : endpoint;
+      const requestUrl = endpoint;
       const res = isDebugMode
         ? await fetch(requestUrl, { method: "GET" })
         : await apiFetch(requestUrl, { method: "GET" });
@@ -99,10 +99,6 @@ export default function MessageDataTab({ title, endpoint, active, emptyText }: M
           刷新列表
         </GlassButton>
       </div>
-
-      <p className="text-xs text-cyan-300/90 mb-4">
-        接口：{process.env.NODE_ENV === "development" ? `http://localhost:5000${endpoint}` : endpoint}
-      </p>
 
       {loading ? (
         <div className="space-y-3">

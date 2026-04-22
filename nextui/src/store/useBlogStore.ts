@@ -241,7 +241,7 @@ export const useBlogStore = create<BlogState>((set) => ({
       set({ isAuthenticated });
 
       return isAuthenticated;
-    } catch (error) {
+    } catch {
       set({ isAuthenticated: false });
       return false;
     }

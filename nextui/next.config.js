@@ -1,5 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  reactStrictMode: false,
+  output: 'standalone',
   async rewrites() {
     if (process.env.NODE_ENV !== 'development') {
       return []
@@ -8,11 +10,11 @@ const nextConfig = {
     return [
       {
         source: '/api/:path*',
-        destination: 'http://localhost:5000/api/:path*',
+        destination: 'http://127.0.0.1:5000/api/:path*',
       },
       {
         source: '/images/:path*',
-        destination: 'http://localhost:5000/images/:path*',
+        destination: 'http://127.0.0.1:5000/images/:path*',
       },
     ]
   },

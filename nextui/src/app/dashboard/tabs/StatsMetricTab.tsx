@@ -118,7 +118,7 @@ export default function StatsMetricTab({ title, endpoint, valueLabel, active, co
     setError(null);
     try {
       const isDebugMode = process.env.NODE_ENV === "development";
-      const requestUrl = isDebugMode ? `http://localhost:5000${endpoint}` : endpoint;
+      const requestUrl = endpoint;
       const res = isDebugMode
         ? await fetch(requestUrl, { method: "GET" })
         : await apiFetch(requestUrl, { method: "GET" });
@@ -156,10 +156,6 @@ export default function StatsMetricTab({ title, endpoint, valueLabel, active, co
           刷新数据
         </GlassButton>
       </div>
-
-      <p className="text-xs text-cyan-300/90 mb-4">
-        接口：{process.env.NODE_ENV === "development" ? `http://localhost:5000${endpoint}` : endpoint}
-      </p>
 
       {loading ? (
         <div className="space-y-3 mb-6">

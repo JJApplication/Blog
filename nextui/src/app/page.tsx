@@ -8,7 +8,7 @@ import { motion } from "framer-motion";
 import { Calendar, Tag } from "lucide-react";
 
 export default function Home() {
-  const { articles, fetchArticles, isLoading, error, pageSize } = useBlogStore();
+  const { articles, fetchArticles, isLoading, error } = useBlogStore();
 
   const latestPageSize = 6;
   useEffect(() => {

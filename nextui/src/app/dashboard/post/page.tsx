@@ -84,9 +84,7 @@ export default function DashboardPostEditorPage() {
       };
 
       const isDebugMode = process.env.NODE_ENV === "development";
-      const endpoint = isDebugMode
-        ? "http://localhost:5000/dashboard/post/add"
-        : "/dashboard/post/add";
+      const endpoint = "/dashboard/post/add";
 
       const res = isDebugMode
         ? await fetch(endpoint, {

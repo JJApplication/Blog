@@ -21,9 +21,7 @@ export default function ArticleListTab({ active }: ArticleListTabProps) {
     setError(null);
     try {
       const isDebugMode = process.env.NODE_ENV === "development";
-      const endpoint = isDebugMode
-        ? "http://localhost:5000/api/dashboard/post"
-        : "/api/dashboard/post";
+      const endpoint = "/api/dashboard/post";
 
       const res = isDebugMode
         ? await fetch(endpoint, { method: "GET" })
@@ -66,10 +64,6 @@ export default function ArticleListTab({ active }: ArticleListTabProps) {
           刷新列表
         </GlassButton>
       </div>
-
-      <p className="text-sm text-cyan-300/90 mb-4">
-        接口：{process.env.NODE_ENV === "development" ? "http://localhost:5000/api/dashboard/post" : "/api/dashboard/post"}
-      </p>
 
       {loading ? (
         <div className="space-y-3">
